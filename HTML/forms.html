@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+
+<body>
+    <form>
+        <form method="post" action="backend.py">
+        <input type="hidden" name="secret_id" id="secret_id" value="Bond-007">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" maxlength="1" placeholder="enter your name" required><br><br>   <!--required is mondatory fild to fill -->
+        <label for="middle_name">Middle Name:</label>
+        <input type="text" name="middle_name" id="middle_name" placeholder="enter your name"><br><br>  <!--placeholder is used to disply the text that you entered -->
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name"><br><br>
+
+        <label for="father_name">Father_name:</label>
+        <input type="text" name="father_name" id="father_name"><br><br>
+        <label for="mother_name">Mother_name:</label>
+        <input type="text" name="Mother_name" id="mother_name"><br><br>
+
+        <label for="email_id">Email ID:</label>
+        <input type="email" name="email_id" id="email_id" autofocus ><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" placeholder="enter your 8 digit password"><br><br>
+        <label for="phone_number"> Phone_number:</label>
+        <input type="tel" name="phone_number" id="phone_number" value="+91-6362758958"><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" min="10" max="24" step="2"><br><br> <!-- step is used to jump how many numbers -->
+        <label for="dob">DOB:</label>
+        <input type="date" name="dob" id="dob" min="2000-01-01" max="2008-01-01"><br><br>
+        <label for="birthday_week">Birthday_week:</label>
+        <input type="week" name="birthday_week" id="birthday_week"><br><br>
+        <label for="birthday_month">Birthday_month:</label>
+        <input type="month" name="birthday_month" id="birthday_month"><br><br>
+        <label for="birthday_time">Birthday_time:</label>
+        <input type="time" name="birthday_time" id="birthday_time"><br><br>
+
+        <label for="college_name">College_name:</label>
+        <input type="text" name="college_name" id="college_name"><br><br>
+        <label for="usn">USN</label>
+        <input type="text" name="usn" id="usn" value="4GL22EC408" readonly><br><br> 
+        <label for="profile_photo">profile_photo:</label>
+        <input type="file" name="profile_photo" id="profile_photo" multiple accept="image/*"><br><br>   <!-- multiple atribute is used to select multiple image -->
+
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="male" value="M">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="F">
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="other" value="O">  <!-- value is needed for radio,checkbox, select dropdown -->
+        <label for="others">Others</label><br><br>
+        
+        <label for="Subjects">Favourite Subjects</label>
+        <input type="checkbox" name="Subject1" id="Kannada">
+        <label for="Kannada">Kannada</label>
+        <input type="checkbox" name="Subject2" id="maths">
+        <label for="maths">Maths</label>
+        <input type="checkbox" name="Subject3" id="social Science">
+        <label for="social_Science">Social Science</label><br><br>
+
+        <!-- e tharanu madbowdu -->
+
+        <label for="Subjects">Favourite Subjects</label>
+        <label for="Kannada">Kannada</label>
+        <input type="checkbox" name="Subject1" id="Kannada" value="Kannada">
+        <label for="maths">Maths</label>
+        <input type="checkbox" name="Subject2" id="maths" value="Science">
+        <label for="social_Science">Social Science</label>
+        <input type="checkbox" name="Subject3" id="social Science" value="social_Science"><br><br>
+
+
+        <label for="upload_video">Upload_video</label>
+        <input type="file" name="upload_video" id="upload_video" accept="video/*">
+        <label for="pdf">Pdf</label>
+        <input type="file" name="pdf" id="pdf" accept="Application/pdf"><br><br>
+        <label for="docx">docx</label>
+        <input type="file" name="docx" id="docx" accept="Application/docx"><br><br>
+
+        <label for="state"> select state:</label>
+        <select name="state" id="state">
+            <option value="KA">Karnataka</option>      
+            <option value="TN">Tamil Nadu</option>
+            <option value="KL">Kerala</option>
+            <option value="MH">Maharastra</option>
+            <option value="MP">Madhya Pradesh</option>
+        </select><br><br>
+
+        <label for="rating">Give your rating</label>
+        <input type="range" name="range" id="range" min="0" max="100"><br><br>
+
+        <label for="address">address</label>
+        <textarea name="address" id="address" rows="10" cols="40"></textarea><br><br>
+
+        <label for="colour">Select the colour</label>
+        <input type="color" name="colour" id="colour"><br><br>
+        
+        
+        <input type="submit" name="submits" id="submit"><br><br>
+        <input type="reset" name="reset" id="reset">
+    
+    </form>
+</body>
+
+</html>
