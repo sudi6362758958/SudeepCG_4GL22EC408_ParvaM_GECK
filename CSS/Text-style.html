@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* Only for offilne Method is used below format */
+        @font-face {
+            font-family: "Anek Kannada";
+            src: url('../fonts/AnekKannada-Regular.ttf');
+        }
+        @font-face {
+            font-family: "Libre";
+            src: url('fonts/LibreBarcode39ExtendedText-Regular.ttf');
+        }
+        @font-face {
+            font-family: "Merriweather";
+            src: url('fonts/Merriweather-Regular.ttf');
+        }
+
+        p{ /* Because of element selector we are getting repetative style */
+            color: blue;
+            background-color: rgb(223, 34, 34);
+            padding: 30px;
+        }
+        /* syntax:for class selector : ".class_name" */
+        .para_one{
+            color: navy;
+            background-color: bisque;
+            font-size: 60px;
+            font-weight: 300;
+            font-family: "Merriweather", serif; 
+        }
+        
+        .para_three{
+            color: rgb(0, 10, 3);
+            background-color: rgb(18, 189, 20);
+        }
+        .heading-1{
+            font-size: 60px;
+            font-weight: 900;
+            font-family: "Merriweather", serif;                    /*serif, sans-serif, monospace, cursive; */
+            /* font-family: "Anek Kannada", serif; */
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .heading-2{
+            font-size: 60px;
+            font-weight: 700;
+            font-family: "Libre";
+            text-align: right;
+        }
+        .some-para{
+            /* We can apllyn 4 values for text-align property: left,right,center & justify */
+            text-align: justify;
+            line-height: 1;
+            text-align: left;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+
+    <!-- Only for online Method is used below format or link -->
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Extended+Text&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@100..800&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+    <p class="para_one">This is a Paragraph.</p>             
+    <p class="para_three">This is a Third Paragraph.</p>
+
+    <h1 class="heading-1">Tejas ks</h1>
+    <p>The above indicates Heading</p>
+    <ol class="para_two">
+        <li>List 1</li>
+        <li>List 2</li>
+        <li>List 3</li>
+    </ol>
+    <h2 class="heading-2">Heading 2</h2>
+    <h3 class="heading-1">Small Heading</h>
+    <p class="some-para">This is a second Paragraph Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dignissimos nisi sunt iusto ipsam exercitationem inventore nihil, accusantium odio magni totam cumque laudantium dicta veritatis, quia recusandae blanditiis architecto nulla!
+        </p><br><br>
+
+    <a href="http://parvam.com">ParvaM</a>
+   
+    <div> This a block of code.</div>                            <!-- example: list ,ordre list  black madutte nav est bardirtive aste barodu-->
+    <div> This a another div block of code.</div>
+    <span>This is a span block of code.</span>       
+    <span>This is a another span block of code.</span>          <!-- example:p,a, h1 to h6 tags continues -->
+     <!--  WE have 2 types of elements in HTML.
+    They are: Block elements & Inline elements -->
+    
+</body>
+</html>

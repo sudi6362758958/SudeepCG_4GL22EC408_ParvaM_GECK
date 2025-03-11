@@ -1,0 +1,51 @@
+nav{
+    background-color: rgb(131, 169, 203);
+}
+border{
+    border: 2px solid brown;
+}
+.menu-bar{
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid black;
+    flex-wrap: wrap;
+    background-image: url("../media/Nature\ Landscope.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.img{
+    width: 100px;
+    
+}
+a{
+    text-decoration: none;
+    color: rgb(170, 17, 17);
+    font-size: xx-large;
+    font-weight: bold;
+}
+.menu-items{
+    /* border: 2px solid black; */
+    padding: 10px;
+    flex-grow: 1;
+}
+.logo img{
+    flex-grow:2;
+    /* flex-shrink: 0; */
+}
+a:hover{
+    color: rgb(227, 227, 27);
+    background-color: rgb(213, 165, 165);
+    border-radius: 150px;
+    padding: 5px;
+    text-decoration: underline;
+    font-size: 30px;
+}
+.img{
+    width: 300px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}

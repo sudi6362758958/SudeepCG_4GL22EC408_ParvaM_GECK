@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Internal CSS -->
+     <style>
+        /* Syntax: */
+        /* selector{ 
+            property : Value;                                           Syntax for next est bekadru hakbowdu example beolw
+            property : Value;
+        } */
+
+        h1,h3,h4{ /*this is element sector */
+            color: rgb(255, 81, 0);
+            margin-top: 20px;
+            margin-bottom: 50px;
+            margin-left: 20px;
+            margin-right: 80px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-left: 40px;
+            padding-right: 50px;
+            border: 5px solid blue;
+            /* syntax for shorthand property */
+            /* Margin: top right bottom left - like clock wise */
+            margin: 50px 20px 30px 40px;
+            /* opposite direction:top-bootom,left-right */
+            margin: 30px 60px;
+            /* top right-left bottom */
+            margin: 30px 60px 90px;
+
+            /* opposite direction:top-bootom,left-right */
+            padding: 50px 20px 30px 40px;
+            padding: 50px 40px;
+            /* top right-left bottom */
+            padding: 50px 40px 90px;
+        }
+
+        p{ /*this is element sector */
+            color: blue;
+        }
+
+        /* shorthand property */
+        table th,td,tr{
+        /* syntax: border: width style colour */
+           border: 1px solid black;
+         }
+        /* Another method */
+        table{
+            border-width: 5px;
+            border-color: rgb(164, 168, 199);
+            border-style: ridge;          /*other border styles - solid.groove,ridge,dashed,dotted */
+            border-radius: 30px;          /*To make the borders curved*/
+
+            /* we can apply border for 4 direction are -
+            top,bottom,right,left*/
+            border-top: 5px solid rgba(7, 230, 70, 0.886);
+            border-bottom: 5px solid rgba(8, 243, 39, 0.885);
+            border-left: 5px groove purple;
+            border-right: 5px dotted purple;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 50px;
+
+            /* To make all border collapse */
+            border-collapse: collapse;
+        }
+
+        th{
+            color: rgb(167, 20, 20);
+            border-top-left-radius: 5px solid pink;
+            border-top-right-radius: 10px;
+        }
+        
+        td{
+            /* color:rgb(0, 250, 62); */
+            /* rgba method where 'a' stands for alpha, value varies from 0 to 1 in decimal number */
+            /* color: rgba(90, 50, 160,0.7);    */
+
+             /* hex- code - Hexadecimal code*/
+             color: #Ff0000;
+             background-color:blue;
+             border-radius: 5px;
+        }
+     </style>
+
+</head>
+<body>
+    <!-- there are 3 types of CSS in Web Development -->
+     <!-- Internal CSS, External CSS,& Inernal CSS -->
+      <h1>This is a Heading</h1>
+      <h1>Hacker Tejas</h1\>
+        <p>This is a Paragraph</p>
+        <!-- We have different kid of selector in CSS -->
+         <!-- They are: Element sector, Class Sector,ID Selector -->
+          <!-- Element Selector Inlcudes all HTML tags -->                                  <!--ex - h1,<p> tag,image,video,form tags-->
+
+            <table>
+                <tr>
+                    <th>Heading 1</th>
+                    <th>Heading 2</th>
+                    <th>Heading 3</th>
+                    <th>Heading 4</th>
+                </tr>
+                <tr>
+                    <td>content 11</td>
+                    <td>content 12</td>
+                    <td>content 13</td>
+                    <td>content 14</td>
+                </tr>
+                <tr>
+                    <td>content 15</td>
+                    <td>content 16</td>
+                    <td>content 17</td>
+                    <td>content 18</td>
+                </tr>
+            </table>
+
+      <h3>This is a Heading</h3>
+      <h4>This is a Heading</h4>
+
+</body>
+</html>

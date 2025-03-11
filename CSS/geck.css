@@ -1,0 +1,28 @@
+body{
+    background-color: bisque;
+}  
+.para-one{
+    color: rgb(1, 1, 32);
+    margin: 50px solid;
+    padding: 30px solid;
+    border: 1px solid black;
+    background-color: goldenrod;
+    text-align: center ;
+}
+.para-two{
+    color: rgb(1, 1, 32);
+    margin: 50px solid;
+    padding: 30px solid;
+    border: 3px groove rgb(239, 8, 8);
+    background-color: rgb(218, 133, 166);
+    text-align: center ;
+}
+.para-three{
+    color: rgb(1, 1, 32);
+    margin: 50px solid;
+    padding: 30px solid;
+    border: 1px solid rgb(47, 16, 222);
+    background-color: gold;
+    text-align: center ;
+    border-radius: 50pxC;
+}

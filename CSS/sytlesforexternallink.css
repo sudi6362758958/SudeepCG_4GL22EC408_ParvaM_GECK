@@ -1,0 +1,24 @@
+/* css can not work stand anlone */
+
+.parent{
+    border: 2px solid brown;
+    display: flex;         /* come in line or verticle direction is known as felx */
+    justify-content:start;      /*ustify-content: works on horizontal direction or x-plane        start,center,end */
+    height: 800px;
+    justify-content:space-evenly;          /* space-around: start & end have less space, space-evenly: equal space b/w all child
+                                                 from satrting to end, space-between: start &end no space inb/w child as common space */
+    /* allign-tems handles the verticle direction or y-axies plane */
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;                  /* make the child sit comfortable in the next line they are:wrap,we dont need means-nowrap is uesd */
+    align-content:center;
+    gap: 50px;
+}
+.child{
+    width: 150px;
+    height: 150px;
+    background-color: darkmagenta;
+    border: 3px solid white;
+    font-size: xx-large;
+    color: white;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .same-line{
+            display: inline;
+            padding: 10px;
+        }
+        li{
+                display: inline;
+                text-decoration: none;
+            }
+            a{
+                text-decoration: none;
+                padding: 10px;
+            }
+            ul{
+                text-align: center;
+                font-size: 30px;  
+            }
+            .links{
+                display: block;     
+            }
+            img{
+                display: block;
+                width:300px;
+                height:300px;
+            }
+            h2{
+                display: inline-block;
+                padding: 30px;
+                border: 2px solid blue;
+            }
+            .box{
+                width: 100px;
+                height: 100px;
+                display:inblock;
+                border: 20px solid brown;
+                background-color: aqua;
+            }
+            .para span{
+                font-size: 30px;
+                display:none;                     /* hidding the content */
+            }
+            .another-para span{
+                visibility: hidden;
+                border: 2px solid black;                   
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="same-line">This is first heading.</h1>
+        <h1 class="same-line">This is second heading.</h1>
+        <p class="same-line">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure animi ad a nemo accusantium unde laboriosam ratione tempora quidem perspiciatis.</p>
+        <p class="same-line">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure animi ad a nemo accusantium unde laboriosam ratione tempora quidem perspiciatis.</p>
+        <ul type="none">
+            <li>
+                <a href="home.html">Home</a>
+            </li>
+            <li>
+                <a href="about_us.html">About_us</a>
+            </li>
+            <li>
+                <a href="services.html">Services</a>
+            </li>
+            <li>
+                <a href="contact_us.html">Contact_us</a>
+            </li>
+        </ul>
+
+        <h1>Quick Links</h1>
+        <a class="links" href="home.html">Home</a>
+        <a class="links" href="about_us.html">About_us</a>
+        <a class="links" href="services.html">Services</a>
+        <a class="links" href="contact_us.html">Contact_us</a>
+        <img src="../media/full view of geck.jpg" alt="Full view" >
+        <img src="../media/Nature Landscope.jpg" alt="Nature">
+    </div>
+        <h2>This is sub-Heading</h2>
+        <h2>This is sub-Heading</h2>
+        <div class="box"></div>
+        <div class="box"></div><br><br>
+
+        <p class="para">We are learning <span>CSS</span></p>             <!-- span is used to hiden the words example:<span>CSS</span>  in display: remain word will execute-->
+        <p class="another-para">We are learning<span>CSS along with </span>HTML</p>
+    
+</body>
+</html>
