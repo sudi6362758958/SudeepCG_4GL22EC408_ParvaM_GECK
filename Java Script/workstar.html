@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //Star pattern in JAVASCRPT
+        var num = 5;
+        var pattern = "";    //pattern string
+        if (num > 1) {      //no star pattern for 0 or negative numbers.
+            for (var i = 1; i <= num; i++) {    //first 'for loop' for horizontal lines
+                for (var j = 1; j <= i; j++) {      //second 'for loop' to print star
+                    pattern += `${i} `;    //adding 2 to pattern string
+                }
+                pattern += "\n";    //new line after row completion
+            }
+            console.log(pattern);   //printing star to console
+        } else {
+            console.log("Number must be greater than 1 to print star pattern.");
+        }
+    </script>
+
+    <!-- num = 5, pattern = ""
+ Step 1:  5 > 1 - T
+ i = 1, 1 < = 5 - T
+ j = 1, 1 < = 1 - T
+ 1
+ j = 2, 2 < = 1 - F
+ 1
+ Step 2: 
+            i = 2, 2 < = 5 - T
+            j = 1, 1 < = 2 - T
+            1
+            2
+            j = 2, 2 < = 2 - T
+            1
+            2   2
+            j =3, 3 < = 2 - F
+            1
+            2   2
+
+ Step 3: 
+            i = 3, 3 < = 5 - T
+            j = 1, 1 < = 3 - T
+            1
+            2
+            3
+            j = 2, 2 < = 3 - T
+            1
+            2   2
+            3   3
+            j = 3, 3 < = 3 - T
+            1
+            2   2
+            3   3   3
+            j = 4, 4 < = 3 - F
+            1
+            2   2
+            3   3   3
+
+Step 4: 
+            i = 4, 4 < = 5 - T
+            j = 1, 1 < = 4 - T
+            1
+            2
+            3
+            4
+            j = 2, 2 < = 4 - T
+            1
+            2   2
+            3   3
+            4   4
+            j = 3, 3 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   
+            j = 4, 4 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   4
+            j = 5, 5 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   4
+ 
+Step 5: 
+            i = 5, 5 < = 5 - T
+            j = 1, 1 < = 4 - T
+            1
+            2
+            3
+            4
+            5
+            j = 2, 2 < = 4 - T
+            1
+            2   2
+            3   3
+            4   4
+            5   5
+            j = 3, 3 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4  
+            5   5   5 
+            j = 4, 4 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   4
+            5   5   5   5
+            j = 5, 5 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   4   
+            5   5   5   5   5 
+            j = 5, 5 < = 4 - T
+            1
+            2   2
+            3   3   3
+            4   4   4   4   
+            5   5   5   5   5 
+   Stop -->
+    
+   <script>
+   //left star
+   var num = 5;
+   var pattern = "";    //pattern string
+   if (num > 1) {      //no star pattern for 0 or negative numbers.
+       for (var i = 1; i <= num; i++) {    //first 'for loop' for horizontal lines
+           for (var j = 0; j <= (num-i); j++) {    //second 'for loop' for opposite pattern; see loop condition
+               pattern += `${i}`;
+           }
+           pattern += "\n";    //new line after row completion
+       }
+       console.log(pattern);   //printing star to console
+   }
+   else {
+       console.log("Number must be greater than 1 to print star pattern.");
+   }
+</script>
+
+    <!-- Left Star 
+Step 1:  5 > 1 - T
+    i = 1, 1 < = 5 - T
+    j = 0, 0 < = (5-1) - T
+    1
+
+    j = 1, 1 < = (5-1) - T
+    1   
+    1   1
+
+    j = 2, 2 < = (5-1) - T
+    1   
+    1   1
+    1   1   1
+
+    j = 3, 3 < = (5-1) - T
+    1
+    1   1
+    1   1   1
+    1   1   1   1
+
+    j = 4, 4 < = (5-1) - T
+    1
+    1   1
+    1   1   1
+    1   1   1   1
+    1   1   1   1   1
+
+    j = 5, 5 < = (5-1) - F
+    1
+    1   1
+    1   1   1
+    1   1   1   1
+    1   1   1   1   1
+    --------------------------------
+
+Step 2: 
+            i = 2, 2 < = 5 - T
+            j = 0, 0 < = (5-2) - T
+            2
+
+            j = 1, 1 < = (5-2) - T
+            2
+            2   2
+
+            j = 2, 2 < = (5-2) - T
+            2
+            2   2
+            2   2   2
+
+            j = 3, 3 < = (5-2) - T
+            2
+            2   2
+            2   2   2
+            2   2   2   2
+
+            j = 4, 4 < = (5-2) - F
+            2
+            2   2
+            2   2   2
+            2   2   2   2
+
+Step 3: 
+            i = 3, 3 < = 5 - T
+            j = 0, 0 < = (5-3) - T
+            3
+
+            j = 1, 1 < = (5-3) - T
+            3
+            3   3
+
+            j = 2, 2 < = (5-3) - T
+            3
+            3   3
+            3   3   3
+
+            j = 3, 3 < = (5-3) - F
+            3
+            3   3
+            3   3   3
+
+Step 3: 
+            i = 4, 4 < = 5 - T
+            j = 0, 0 < = (5-4) - T
+            4
+
+            j = 1, 1 < = (5-4) - T
+            4
+            4   4
+
+            j = 2, 2 < = (5-4) - F
+            4
+            4   4
+
+Step 4: 
+            i = 5, 5 < = 5 - T
+            j = 0, 0 < = (5-5) - T
+            5
+
+            j = 1, 1 < = (5-5) - F
+            5
+             -->
+
+<script>
+
+     // Right Triangle
+     var num = 5;
+        var pattern = "";    //pattern string
+        if (num > 1) {      //no star pattern for 0 or negative numbers.
+            for (var i = 1; i <=num; i++) {    //first 'for loop' for horizontal lines
+                for (var j = 1; j <= (num-i); j++) {    //second 'for loop' to add 'spaces' before pattern
+                    pattern += "  ";
+                }
+
+                for (var k = 1; k <= i; k++) {      //third 'for loop' to add 2 to pattern string
+                    pattern += "2 ";
+                }
+                pattern += "\n";    //new line after row completion
+            }
+            console.log(pattern);   //printing star to console
+        }
+        else {
+            console.log("Number must be greater than 1 to print star pattern.");
+        }
+</script>
+
+ <!--  Right Star 
+               
+Step 1:  5 > 1 - T
+               i = 1, 1 <= 5 - T
+               j = 1, 1 <= (5-1) - T
+               k = 1, 1 <= 1 - T
+               
+               j = 2, 2 <= (5-1) - T
+               k = 2, 2 <= 1 - F
+                               2
+-------------------------------------
+Step 2:  
+               i = 2, 2 <= 5 - T
+               j = 1, 1 <= (5-2) - T
+               k = 1, 1 <= 2 - T
+                               2
+               j = 2, 2 <= (5-2) - T
+               k = 2, 2 <= 2 - T
+                               2    
+                           2   2 
+                           
+               j = 3, 3 <= (5-2) - T
+               k = 3, 3 <= 2 - F
+                               2    
+                           2   2             
+-------------------------------------
+Step 3:  
+               i = 3, 3 <= 5 - T
+               j = 1, 1 <= (5-3) - T
+               k = 1, 1 <= 3 - T
+                               2
+               j = 2, 2 <= (5-3) - T
+               k = 2, 2 <= 3 - T
+                               2    
+                           2   2 
+                           
+               j = 3, 3 <= (5-3) - F
+               k = 3, 3 <= 3 - T
+                               2    
+                           2   2             
+                       2   2   2 
+           
+               j = 4, 4 <= (5-3) - F
+               k = 4, 4 <= 3 - F
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+---------------------------------
+Step 4:  
+               i = 4, 4 <= 5 - T
+               j = 1, 1 <= (5-4) - T
+               k = 1, 1 <= 4 - T
+                               2
+               j = 2, 2 <= (5-4) - F
+               k = 2, 2 <= 4 - T
+                               2    
+                           2   2 
+                           
+               j = 3, 3 <= (5-4) - F
+               k = 3, 3 <= 4 - T
+                               2    
+                           2   2             
+                       2   2   2 
+           
+               j = 4, 4 <= (5-4) - F
+               k = 4, 4 <= 4 - T
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+                   2   2   2   2  
+           
+               j = 5, 5 <= (5-4) - F
+               k = 5, 5 <= 4 - F
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+                   2   2   2   2             
+----------------------------------
+Step 5:  
+               i = 5, 5 <= 5 - T
+               j = 1, 1 <= (5-5) - F
+               k = 1, 1 <= 5 - T
+                                2
+               j = 2, 2 <= (5-5) - F
+               k = 2, 2 <= 5 - T
+                               2    
+                           2   2 
+                           
+               j = 3, 3 <= (5-5) - F
+               k = 3, 3 <= 5 - T
+                               2    
+                           2   2             
+                       2   2   2 
+           
+               j = 4, 4 <= (5-5) - F
+               k = 4, 4 <= 5 - T
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+                   2   2   2   2  
+           
+               j = 5, 5 <= (5-5) - F
+               k = 5, 5 <= 5 - T
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+                2   2   2   2   2 
+                
+               j = 6, 6 <= (5-5) - F
+               k = 6, 6 <= 5 - F
+                               2    
+                           2   2             
+                       2   2   2             
+                       2   2   2             
+                2   2   2   2   2  
+           
+
+
+
+
+-->
+
+
+</body>
+</html>

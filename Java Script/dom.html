@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- <h1 id="heading">Heading</h1>
+
+    <p>This is a P tag</p> -->
+    <!-- <script>
+        const heading = document.getElementById("heading");
+        heading.innerHTML = "DOM Heading"
+        console.log(heading);
+        
+        //  We can access complete HTML Document
+        const doc = document;
+        console.log(doc);
+
+        // We can  acess complete body Structure
+        const body = document.getElementsByTagName("body");
+        console.log(body);
+    </script> -->
+
+    <script>
+
+        // DOM = Document Obeject Model
+
+        const root = document.getElementById("root");
+        const heading = document.createElement("h1");
+        const para = document.createElement("p");
+
+        document.title = "DOM Document";
+
+        heading.innerHTML = "Helo World!";
+        heading.style.color = "blue";
+        heading.style.background = "Yellow";
+        heading.style.textAlign = "center";
+
+        para.innerHTML = "This is a paragraph";
+
+        root.append(heading);
+        root.append(para);
+
+        console.log(root);
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="display-3 text-center bg-warning p-2 mt-2">Registration Form</h1>
+    <!-- Basic Details: Name, Father Name, Mother Name, DoB, Gender, Email-Id, Phone Number, Temporary & Permanent Address (City, State, Country, Pincode), Aadhar No. 
+        Education Details: 10th Std(School, Education Board, Percentage, Year of Completion)
+                           12th Std / PUC / Diploma(College, Education Board, Percentage, Year of Completion)
+        Admission Details: Branch, Admission Quota, Fees, Facilities(Canteen, Hostel, Bus, Library, Sports Club), Photo -->
+    <form id="registration_form" onsubmit="return validateForm(event)">
+      <h1 class="display-5 text-center bg-secondary p-2 mt-2 text-light">Basic Details</h1>
+      <div class="mb-3">
+        <label for="student_name" class="form-label">Student Name</label>
+        <input type="text" class="form-control" id="student_name" placeholder="Enter your name">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="father_name" class="form-label">Father Name</label>
+            <input type="text" class="form-control" id="father_name" placeholder="Enter your father name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="mother_name" class="form-label">Mother Name</label>
+            <input type="text" class="form-control" id="mother_name" placeholder="Enter your mother name">
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="dob" placeholder="Enter your DOB">
+      </div>
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male" >
+          <label class="form-check-label" for="male">
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+          <label class="form-check-label" for="female">
+            Female
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="email_id" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email_id" placeholder="Enter your e-mail id">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone_number" placeholder="Enter your phone number">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="temp_address" class="form-label">Temporary Address</label>
+            <textarea class="form-control" id="temp_address" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="permanent_address" class="form-label">Permanent Address</label>
+            <textarea class="form-control" id="permanent_address" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter your city">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <select class="form-select" aria-label="Select your state">
+              <option value="KA" selected>Karnataka</option>
+              <option value="TN">Tamil Nadu</option>
+              <option value="KL">Kerala</option>
+              <option value="MH">Maharashtra</option>
+              <option value="TS">Telangana</option>
+              <option value="AP">Andhra Pradesh</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" placeholder="Enter your country">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="pin_code" class="form-label">Pin Code</label>
+            <input type="number" class="form-control" id="pin_code" placeholder="Enter your pin code">
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="aadhar_number" class="form-label">Aadhar Number</label>
+        <input type="number" class="form-control" id="aadhar_number" placeholder="Enter your aadhar number">
+      </div>
+      <div class="mb-3">
+        <label for="photo" class="form-label">Upload Photo</label>
+        <input class="form-control" type="file" id="photo">
+      </div>
+      <hr>
+      <h1 class="display-5 text-center bg-secondary p-2 mt-2 text-light">Educational Details</h1>
+      <h2>10th Std / SSLC</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="school_name" class="form-label">School Name</label>
+            <input type="text" class="form-control" id="school_name" placeholder="Enter your school name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="education_board" class="form-label">Education Board</label>
+            <input type="text" class="form-control" id="education_board" placeholder="Enter your education board">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="percentage" class="form-label">Percentage</label>
+            <input type="number" class="form-control" id="percentage" placeholder="Enter your percentage">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="year_of_passing" class="form-label">Year of Passing</label>
+            <input type="month" class="form-control" id="year_of_passing" placeholder="Enter your year of passing">
+          </div>
+        </div>
+      </div>
+      <h2>12th Std / PUC / Diploma</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="college_name" class="form-label">College Name</label>
+            <input type="text" class="form-control" id="college_name" placeholder="Enter your college name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="pu_education_board" class="form-label">Education Board</label>
+            <input type="text" class="form-control" id="pu_education_board" placeholder="Enter your education board">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="pu_percentage" class="form-label">Percentage</label>
+            <input type="number" class="form-control" id="pu_percentage" placeholder="Enter your percentage">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="pu_year_of_passing" class="form-label">Year of Passing</label>
+            <input type="month" class="form-control" id="pu_year_of_passing" placeholder="Enter your year of passing">
+          </div>
+        </div>
+      </div>
+      <hr>
+      <h1 class="display-5 text-center bg-secondary p-2 mt-2 text-light">Admission Details</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="branch" class="form-label">Branch</label>
+            <div class="d-flex justify-content-start gap-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="branch" id="ece" value="ece" >
+                <label class="form-check-label" for="ece">
+                  ECE
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="branch" id="cse" value="cse">
+                <label class="form-check-label" for="cse">
+                  CSE
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="branch" id="mech" value="mech">
+                <label class="form-check-label" for="mech">
+                  Mechanical
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="branch" id="civil" value="civil">
+                <label class="form-check-label" for="civil">
+                  Civil
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="admission_quota" class="form-label">Admission Quota</label>
+            <div class="d-flex justify-content-start gap-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admission_quota" id="cet" value="cet">
+                <label class="form-check-label" for="cet">
+                  CET
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admission_quota" id="management" value="management">
+                <label class="form-check-label" for="management">
+                  Management
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="fees" class="form-label">Fees</label>
+            <input type="number" class="form-control" id="fees" placeholder="Enter your fees">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="facilities" class="form-label">Facilities</label>
+            <div class="row">
+              <div class="d-flex justify-content-between">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="canteen" id="canteen" >
+                  <label class="form-check-label" for="canteen">
+                    Canteen
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="hostel">
+                  <label class="form-check-label" for="hostel">
+                    Hostel
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="transportation">
+                  <label class="form-check-label" for="transportation">
+                    Transportation
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="library">
+                  <label class="form-check-label" for="library">
+                    Library
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="sports">
+                  <label class="form-check-label" for="sports">
+                    Sports
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="agree_terms">
+        <label class="form-check-label" for="agree_terms">Agree to the Terms & Conditions</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="validation-1.js"></script>
+</body>
+
+</html>

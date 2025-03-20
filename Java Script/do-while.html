@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var number = 12345, sum = 0;
+        while(number > 0){
+            sum = sum + number % 10;
+            number = Math.floor(number / 10);
+        }
+        console.log(`Sum of individual digit is: ${sum}`);
+
+        var Number = 3, i = 1, fact = 1;
+        while(i <= Number){
+            fact = fact * i;
+            i ++;
+        }
+        console.log(`Factorial of ${Number}: ${fact}`);
+
+        // do-While loop
+        var limit = 0, i = 1;
+        do{
+            console.log(`${i}`);
+        } while(limit > 0);
+
+        var i = 1;
+        console.log(`Printing 10 Numbers: `);
+        do{
+            console.log(`${i}`);
+            i ++;
+        } while(i <= 10);
+    </script>
+</body>
+</html>

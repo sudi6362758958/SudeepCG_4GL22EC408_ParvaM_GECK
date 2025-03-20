@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num = 2002, reverse = 0, digit = 0;
+        var isPolindrome = num;
+        console.log(`Original Number: ${num}`);
+        while(num > 0){
+            //  digit = num % 10;
+            // reverse = reverse * 10 + digit;  
+            reverse = reverse * 10 + num % 10;    //when digit not used in that time use this
+            num = Math.floor(num / 10);
+        } 
+        console.log(`Reversed Number: ${reverse}`);
+        if(isPolindrome === reverse){
+            console.log(`${isPolindrome} is a Polindrome Number. Because ${isPolindrome} is equal to ${reverse}`);
+        } else{
+            console.log(`${isPolindrome} is not a Polindrome Number. Because ${isPolindrome} is not equal to ${reverse}`);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var month = 1;
+        switch(month){
+            case 1: 
+                console.log("January");
+                break;
+            case 2: 
+                console.log("February");
+                break;
+            case 3: 
+                console.log("March");
+                break;
+            case 4: 
+                console.log("April");
+                break;
+            case 5: 
+                console.log("May");
+                break;
+            case 6: 
+                console.log("June");
+                break;
+            default:
+                console.log("Not a Valid Month");
+                break;
+        }
+
+        var vowel = "A";
+        switch(vowel){
+            case "A":
+            case "E":
+            case "I":
+            case "O":
+            case "U":
+                console.log("You've entered an Vowel");
+                break;
+            default:
+                console.log("Invalid Input!");
+                break;
+        }
+
+        var input1 = 10, input2 = 20;
+        var symbol = "$";
+        switch(symbol){
+            case "+":
+                console.log(`Sum: ${input1 + input2}`);
+                break;
+            case "-":
+                console.log(`Difference: ${input1 - input2}`);
+                break;
+            case "*":
+                console.log(`Product: ${input1 * input2}`);
+                break;
+            case "/":
+                console.log(`Quotient: ${input1 / input2}`);
+                break;
+            case "%":
+                console.log(`Remainder: ${input1 % input2}`);
+                break;
+            default: 
+                console.log("Invalid Arithmetic Operation!");
+                break;
+        }
+    </script>
+</body>
+</html>

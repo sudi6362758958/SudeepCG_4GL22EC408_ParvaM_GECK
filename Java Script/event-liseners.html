@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading">This is Heading</h1>
+     <!-- This is a function call -->
+    <p id="para" ondblclick="changeText()">Lorem ipsum dolor sit amet.</p>
+    <input type="text" id="field" value="field value">
+    <p  id="print-text"></p>
+
+    <script>
+        const heading = document.getElementById("heading");
+        heading.addEventListener("click",function(){
+            heading.innerHTML = "Heading changed because you've clicked"
+            })
+
+            heading.addEventListener("dblclick",function(){
+            heading.innerHTML = "Main Heading because you've clicked twice"
+            })
+
+            // This is function declartion
+            function changeText(){
+                //this is a function defination
+                const para = document.getElementById("para");
+
+                para.innerHTML = "This para was changed by DOM using function";
+            }
+
+            const field = document.getElementById("field");
+                field.addEventListener("keydown", function(event){
+                    const printText = document.getElementById("print-text")
+                    printText.innerHTML = `you've clicked: ${event.key}`;
+                });
+    </script>
+</body>
+</html>

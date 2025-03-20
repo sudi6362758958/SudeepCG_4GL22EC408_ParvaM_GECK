@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is a Heading</h1>
+    <h1>This is one more Heading</h1>
+    <p>This is a paragraph</p>
+    <h2 class="heading-2">This is another heading</h2>
+    <h2 class="heading-2">This is Third heading</h2>
+    <h2 class="heading-2">This is Fourth heading</h2>
+    <p class="heading-2">This is first para</p>
+    <p id="imp"> This is important text</p>
+
+    <script>
+        
+        //Selectors refrence using id
+        const important = document.getElementById("imp");
+        console.log(important);
+
+        important.innerHTML = "This is very Important!"; //we can use textContent = innerHTML
+
+        //selector reference using class name
+        const heading2 = document.getElementsByClassName("heading-2");
+        console.log(heading2);
+
+
+        heading2[0].innerHTML = "This is sudeep!";
+
+        //Selector reference using TagName
+        const heading = document.getElementsByTagName("h1");
+        console.log(heading);
+
+        heading[1].style.color = "blue";
+
+        //Selector reference using QuerySelectors
+        const secondHeading = document.querySelector(".heading-2");
+        secondHeading.style.backgroundColor = "red";
+
+        const firstHeading = document.querySelector("h1");
+        firstHeading.style.fontSize = "50px";
+
+        //Selector reference using QuerySelectorsAll
+        const allHeading = document.querySelectorAll("h1");
+        allHeading[0].style.backgroundColor = "grey";
+        console.log(allHeading);
+
+        const allClasses = document.querySelectorAll(".heading-2");
+        console.log(allClasses);
+
+        allClasses[1].style.padding = "50px";
+        allClasses[1].style.border = "2px solid black";
+
+        // To apply any css properties,just change it from hypes to camel case
+        // Ex: backgroundColor => backgroundColor
+        // Ex: text-align => textAlign
+        // Ex: padding-right => paddingRight
+
+        
+    </script>
+</body>
+</html>

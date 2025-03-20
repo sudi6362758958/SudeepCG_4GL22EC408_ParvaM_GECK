@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)file:///C:/Users/User/Desktop/PARVAM%20INTERNSHIP/Java%20Script/event-liseners.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading">This is Heading</h1>
+     <!-- This is a function call -->
+    <p id="para" ondblclick="changeText()">This para was changed by DOM using function</p>
+
+    <script>
+        const heading = document.getElementById("heading");
+        heading.addEventListener("click",function(){
+            heading.innerHTML = "Heading changed because you've clicked"
+            })
+
+            heading.addEventListener("dblclick",function(){
+            heading.innerHTML = "Main Heading because you've clicked twice"
+            })
+
+            // This is function declartion
+            function changeText(){
+                //this is a function defination
+                const para = document.getElementById("para");
+
+                para.innerHTML = "This para was changed by DOM using function";
+
+            }
+    </script>
+
+</body></html>
