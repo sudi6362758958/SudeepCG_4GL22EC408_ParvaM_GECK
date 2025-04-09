@@ -1,0 +1,13 @@
+cd student_crud
+python manage.py runserver
+python manage.py startapp student_application
+pip install mysqlclient
+python manage.py makemigrations
+pip uninstall django
+pip install django==4.2
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+command to save the history of current cmd terminal: 
+doskey /history > django-steps.txt

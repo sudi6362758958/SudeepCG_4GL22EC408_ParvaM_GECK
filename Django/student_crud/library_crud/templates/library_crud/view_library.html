@@ -1,0 +1,50 @@
+{%extends 'library_crud/menu.html'%}
+
+{% block content %}
+<h1 class="bg-info text-center">View library Information</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Attribute</th>
+        <th scope="col">Value</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <div class="container mt-5">
+        <h2 class="mb-4">Book Details</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <td>{{ library.name }}</td>
+            </tr>
+            <tr>
+                <th>Class</th>
+                <td>{{ library.Class }}</td>
+            </tr>
+            <tr>
+                <th>Book ID</th>
+                <td>{{ library.book_id }}</td>
+            </tr>
+            <tr>
+                <th>Book Name</th>
+                <td>{{ library.book_name }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ library.author }}</td>
+            </tr>
+            <tr>
+                <th>Publication</th>
+                <td>{{ library.publication }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ library.quantity }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'library_list' %}" class="btn btn-secondary mt-3">Back</a>
+    </div>
+    </tbody>
+  </table>
+{%endblock%}

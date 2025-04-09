@@ -1,0 +1,43 @@
+{%extends 'library_crud/menu.html'%}
+
+{% block content %}
+bs-table
+<h1>list of library books</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Class</th>
+        <th scope="col">Book id</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Publication</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for library in librarys %}
+        <tr>
+            <td>{{library.name }}</td>
+            <td>{{library.Class }}</td>
+            <td>{{library.book_id }}</td>
+            <td>{{library.book_name }}</td>
+            <td>{{library.author }}</td>
+            <td>{{library.publication }}</td>
+            <td>{{library.quantity }}</td>
+            <td>
+                <a href="{% url 'view_library' library.pk %}" class="btn btn-info btn-sm">View</a>
+                <a href="{% url 'edit_library' library.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'delete_library' library.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">No Books found!</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{%endblock%}

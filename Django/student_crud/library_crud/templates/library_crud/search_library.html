@@ -1,0 +1,20 @@
+{%extends 'library_crud/menu.html'%}
+
+{% block content %}
+<h1 class="bg-info text-center">Search Library Information</h1>
+<div class="container mt-5">
+    <h2 class="mb-4">
+        Search Library Details
+    </h2>
+    <form method="post" class="border p-4 bg-light rounded">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success">
+            Search
+        </button>
+        <a href="{% url 'library_list' %}" class="btn btn-secondary">Back</a>
+    </form>
+
+{%endblock%}
