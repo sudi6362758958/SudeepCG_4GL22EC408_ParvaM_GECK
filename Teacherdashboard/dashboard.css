@@ -1,0 +1,150 @@
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   flex-wrap: wrap;
+ }
+
+ .a{                                  
+  text-decoration: none;
+  color: white;
+ }
+ .a:hover{
+  background-color: #c90bb6;
+ }
+
+ body {
+   font-family: Arial, sans-serif;
+   display: flex;
+   min-height: 200vh;
+ }
+
+ /* Sidebar */
+ .sidebar {
+   width: 222px;
+   background-color: #e01111d5;
+   color: white;
+   transition: width 0.3s;
+   overflow: hidden;
+ }
+
+ .sidebar.collapsed {
+   width: 70px;
+ }
+
+ .sidebar.collapsed img{
+  width: 50px;
+  height: auto;
+ }
+
+ .sidebar ul {
+   list-style: none;
+   padding: 10px;
+ }
+
+ .sidebar ul li {
+   margin: 20px 0;
+ }
+
+ /* Main Content */
+ .main {
+   flex: 1;
+   background-color: #f4f4f4;
+ }
+
+ /* Navbar */
+ .navbar {
+   background-color: #c90bb6;
+   color: white;
+   padding: 15px 20px;
+   display: flex;
+   /* align-items: center; */
+ }
+
+ .toggle-btn {
+   background: none;
+   border: none;
+   color: white;
+   font-size: 20px;
+   cursor: pointer;
+ }
+
+ .toggle-btn::before{
+  content: '☰';
+  margin: 10px;
+ }
+
+ .toggle-btn.closed::before{
+  content: 'X';
+ }
+
+ i.fa-solid {
+   color: blue;
+   font-size: 30px;
+ }
+
+
+ body {
+   font-family: 'Roboto', sans-serif;
+   background: #f5f5f5;
+   padding: 20px;
+ }
+
+ .card-container {
+   /* width: 500px; */
+   /* margin: 20px; */
+   padding: 50px;
+   display: flex;
+   justify-content: space-between;
+   gap: 50px;
+ }
+
+ .card {
+   background-color: white;
+   border-radius: 8px;
+   padding: 15px 20px;
+   margin-bottom: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+ }
+
+ .card .text {
+   color: #5a6e7c;
+ }
+
+ .card .number {
+   font-size: 24px;
+   color: #3b5160;
+   font-weight: bold;
+ }
+
+ .card i {
+   font-size: 32px;
+   color: #c0c0c0;
+ }
+
+ .custom-card{
+  width: 200px;
+ }
+
+ /* @media screen and (max-width: 480px) {
+  .sidebar.collapsed {
+    width: 50px;
+  }
+
+  .sidebar.collapsed ul li a{
+    text-decoration: none;
+    display: none;
+  } 
+ } */
+
+ footer{
+  color: white;
+  background-image: linear-gradient(rgb(75, 199, 234), rgb(21, 93, 247));
+  text-align: center;
+  justify-content: space-evenly;
+  margin: 50px;
+  padding: 10px;
+ }

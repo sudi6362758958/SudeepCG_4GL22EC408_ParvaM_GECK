@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Creator & Auto-Grading System</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+    }
+
+    /* .main {
+      margin-left: 20px;
+      padding: 20px;         
+    } */
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin: 20px;
+    }
+
+    .form-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .btn {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #3498db;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #ecf0f1;
+    }
+
+    .action-btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .edit {
+      background-color: #27ae60;
+    }
+
+    .delete {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <img src="../media/geck kushalanagr.jpg" alt="" width="200px" margin="20px">
+      <li><i class="fa-solid fa-house"></i><a class="a" href="#home">Home</a> </li>
+      <li><i class="fa-solid fa-users"></i><a class="a" href="students.html">Students</a></li>
+      <li><i class="fa-solid fa-book"></i><a class="a" href="subjects.html">Subjects</a></li>
+      <li><i class="fa-solid fa-chart-simple"></i><a class="a" href="ledaerboard.html">Leader Board</a></li>
+      <li><i class="fa-solid fa-circle-question"></i><a class="a" href="quiz-zone.html">Quiz zone</a></li>
+      <li><i class="fa-solid fa-right-from-bracket"></i><a class="a" href="logout.html"> Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="navbar">
+      <button class="toggle-btn" onclick="toggleSidebar()"></button>
+      <h1>Teacher Dashboard</h1>
+    </div>
+
+  <div class="main">
+    <h2>Quiz Zone - Add Questions</h2>
+
+    <div class="form-section">
+      <form>
+        <div class="form-group">
+          <label>Select Subject</label>
+          <select>
+            <option value="">-- Choose Subject --</option>
+            <option>Advance VLSI</option>
+            <option>Optical & Wireless communication</option>
+            <option>Biomedical Signal processing</option>
+            <option>Network Security</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Question</label>
+          <textarea rows="3" placeholder="Enter your question here..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Option A</label>
+          <input type="text" placeholder="Enter option A" />
+        </div>
+
+        <div class="form-group">
+          <label>Option B</label>
+          <input type="text" placeholder="Enter option B" />
+        </div>
+
+        <div class="form-group">
+          <label>Option C</label>
+          <input type="text" placeholder="Enter option C" />
+        </div>
+
+        <div class="form-group">
+          <label>Option D</label>
+          <input type="text" placeholder="Enter option D" />
+        </div>
+
+        <div class="form-group">
+          <label>Correct Answer</label>
+          <select>
+            <option value="">-- Select Correct Answer --</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn">Add Question</button>
+      </form>
+    </div>
+
+    <h2>Existing Questions</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Question</th>
+        <th>Correct Answer</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Mathematics</td>
+        <td>What is 2 + 2?</td>
+        <td>A</td>
+        <td>
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Science</td>
+        <td>What planet is known as the Red Planet?</td>
+        <td>B</td>
+        <td>
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <footer>
+    <p class="p">CONTENT DEVELOPED & OWNED BY: Department of Electronics & Communication Engineering</p>
+    <p>Government Engineering College Kushalanagar&copy; 2025 All Rights Reserved <br>
+  </footer>
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("collapsed");
+      document.querySelector(".toggle-btn").classList.toggle("closed");
+    }
+  </script>
+  <script src="https://kit.fontawesome.com/37892008be.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</div>
+
+  </body>
+  </html>
