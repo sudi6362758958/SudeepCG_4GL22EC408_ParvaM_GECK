@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .subject-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Teacher Dashboard</h1>
+
+    <!-- Create Subject -->
+    <h2>Create New Subject</h2>
+    <form id="subjectForm">
+        <input type="text" id="subjectName" placeholder="Enter Subject Name" required>
+        <button type="submit">Create Subject</button>
+    </form>
+
+    <!-- Create Quiz -->
+    <h2>Create Quiz for a Subject</h2>
+    <form id="quizForm">
+        <select id="subjectSelect" required>
+            <option value="">Select Subject</option>
+        </select>
+        <input type="text" id="quizQuestion" placeholder="Enter Quiz Question" required>
+        <textarea id="quizAnswer" placeholder="Enter Quiz Answer" required></textarea>
+        <button type="submit">Create Quiz</button>
+    </form>
+
+    <!-- Subjects and Quizzes -->
+    <div class="subject-list" id="subjectList">
+        <h2>Subjects and Quizzes</h2>
+        <!-- Dynamic Content will appear here -->
+    </div>
+</div>
+
+<script>
+    const subjects = {};
+
+    document.getElementById('subjectForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const subjectName = document.getElementById('subjectName').value.trim();
+        if (subjectName && !subjects[subjectName]) {
+            subjects[subjectName] = [];
+            const option = document.createElement('option');
+            option.value = subjectName;
+            option.textContent = subjectName;
+            document.getElementById('subjectSelect').appendChild(option);
+            updateSubjectList();
+            document.getElementById('subjectName').value = '';
+        } else {
+            alert('Subject already exists or name is empty.');
+        }
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const subjectName = document.getElementById('subjectSelect').value;
+        const quizQuestion = document.getElementById('quizQuestion').value.trim();
+        const quizAnswer = document.getElementById('quizAnswer').value.trim();
+        if (subjectName && quizQuestion && quizAnswer) {
+            subjects[subjectName].push({question: quizQuestion, answer: quizAnswer});
+            updateSubjectList();
+            document.getElementById('quizQuestion').value = '';
+            document.getElementById('quizAnswer').value = '';
+        } else {
+            alert('Please select subject and fill in question and answer.');
+        }
+    });
+
+    function updateSubjectList() {
+        const subjectList = document.getElementById('subjectList');
+        subjectList.innerHTML = '<h2>Subjects and Quizzes</h2>';
+        for (const subject in subjects) {
+            const subjectDiv = document.createElement('div');
+            subjectDiv.innerHTML = `<h3>${subject}</h3>`;
+            const quizList = document.createElement('ul');
+            subjects[subject].forEach(quiz => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>Q:</strong> ${quiz.question} <br> <strong>A:</strong> ${quiz.answer}`;
+                quizList.appendChild(li);
+            });
+            subjectDiv.appendChild(quizList);
+            subjectList.appendChild(subjectDiv);
+        }
+    }
+</script>
+
+</body>
+</html>

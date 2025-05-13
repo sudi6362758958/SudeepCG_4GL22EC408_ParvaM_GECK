@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <form id="category_form" method="POST" action="db_operations.php" class="form-horizontal form-label-left"
+                enctype="multipart/form-data" novalidate="novalidate">
+                <input type="hidden" id="add_category" name="add_category" required="" value="1" aria-required="true">
+                <input type="hidden" name="type" value="1" required="" aria-required="true">
+                <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                        <label for="language">Language</label>
+                        <select id="language_id" name="language_id" required="" class="form-control"
+                            aria-required="true">
+                            <option value="">Select language</option>
+                            <option value="85">English</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 col-sm-12">
+                        <label for="name">Category Name</label>
+                        <input type="text" id="name" name="name" required="" class="form-control" aria-required="true">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" class="form-control">
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-12">
+                        <label for="category_plan">Plan</label>
+
+                        <div id="status" class="btn-group">
+                            <label class="btn btn-default" data-toggle-class="btn-primary"
+                                data-toggle-passive-class="btn-default">
+                                <input type="radio" name="cat_plan" value="1"> Paid
+                            </label>
+                            <label class="btn btn-default" data-toggle-class="btn-primary"
+                                data-toggle-passive-class="btn-default">
+                                <input type="radio" name="cat_plan" value="2" checked=""> Free
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+
+                        <div class="paid_cat" style="display: none;">
+                            <label for="coin">Amount</label>
+                            <input type="number" name="category_amount" id="category_amount" class="form-control"
+                                required="" aria-required="true">
+                            <input type="hidden" name="category_plan" id="category_plan" value="Free">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class=" ln_solid">
+                </div>
+                <div id="result"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <button type="submit" id="submit_btn" class="btn btn-warning">Add New</button>
+                    </div>
+                </div>
+
+            </form>
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+
+</html>
