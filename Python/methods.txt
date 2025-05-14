@@ -1,0 +1,69 @@
+Lists:
+------
+Definition:
+    A list is a mutable, ordered collection of elements. It can hold items of different data types.
+
+Properties:
+    Ordered (elements have a defined index)
+    Mutable (can be modified)
+    Allows duplicate items
+    Can store mixed data types
+
+Common Methods:
+    append(): Add item to end
+    insert(index, value): Insert item at specific index
+    remove(value): Remove first occurrence of value
+    pop(index): Remove item at index
+    sort(): Sort list
+    reverse(): Reverse the list
+
+Tuples:
+-------
+Definition:
+    A tuple is an immutable, ordered collection of elements. Once created, you cannot modify its contents.
+
+Properties:
+    Ordered
+    Immutable
+    Allows duplicate items
+    Can store mixed data types
+
+Common Methods:
+    count(value): Returns number of times value appears
+    index(value): Returns index of first occurrence
+
+Dictionaries:
+-------------
+Definition:
+    A dictionary is an unordered, mutable collection of key-value pairs. Keys must be unique and immutable.
+
+Properties:
+    Unordered (until Python 3.7+ — now insertion ordered)
+    Mutable
+    Key-value pairs
+    Keys are unique and immutable
+
+Common Methods:
+    get(key): Returns value of key
+    keys(): Returns all keys
+    values(): Returns all values
+    items(): Returns all key-value pairs
+    pop(key): Removes item with key
+
+Strings:
+--------
+Definition:
+    A string is an immutable sequence of Unicode characters.
+
+Properties:
+    Immutable
+    Indexed and iterable
+    Supports slicing
+    Supports various methods for manipulation
+
+Common Methods:
+    lower(): Converts to lowercase
+    upper(): Converts to uppercase
+    replace(old, new): Replaces substring
+    split(): Splits into list
+    strip(): Removes leading/trailing whitespace

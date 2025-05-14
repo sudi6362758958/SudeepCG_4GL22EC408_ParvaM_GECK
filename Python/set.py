@@ -39,3 +39,28 @@ print(multiples2.union(multiples3)) # union of two sets
 multiples2 = {2, 4, 6, 8, 10}
 multiples3 = {3, 6, 9, 12, 15}
 print(multiples2.intersection(multiples3)) # intersection of two sets
+
+
+
+# difference method is used to get the unique elements from either of the sets
+print(multiples2.difference(multiples3)) # shows the unique items of set1
+print(multiples3.difference(multiples2)) # shows the unique items of set2
+
+# symmetric_difference method is used to get the unique elements from both of the sets
+print(multiples2.symmetric_difference(multiples3)) # shows the unique items from both sets
+
+# issubset method is used to check if all the elements of the given set is present in another set
+set1 = {2, 4, 6}
+set2 = {4, 6}
+set3 = {4, 6, 8}
+
+print(set2.issubset(set1))
+print(set3.issubset(set1))
+
+# issuperset method is used to check if all the elements of another set is present in current set
+set1 = {2, 4, 6}
+set2 = {4, 6}
+set3 = {4, 6, 8}
+
+print(set1.issuperset(set2))
+print(set3.issuperset(set1))
