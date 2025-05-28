@@ -1,0 +1,18 @@
+{% extends 'quiz_app/base.html' %}
+{% block title %}Available Quizzes{% endblock %}
+
+{% block content %}
+    <h2>Available Quizzes</h2>
+    <ul>
+        {% for quiz in quizzes %}
+            <li>
+                <strong>{{ quiz.title }}</strong> – Duration: {{ quiz.duration }} min
+                <br>
+                <a href="{% url 'attempt_quiz' quiz.id %}">Take Quiz</a> |
+                <a href="{% url 'leaderboard' quiz.id %}">View Leaderboard</a>
+            </li>
+        {% empty %}
+            <li>No active quizzes available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'quiz_app/base.html' %}
+{% block title %}Leaderboard - {{ quiz.title }}{% endblock %}
+
+{% block content %}
+    <h2>🏆 Leaderboard – {{ quiz.title }}</h2>
+
+    <table border="2" cellpadding="8" style="margin: 0px auto;">
+        <tr>
+            <th>Rank</th>
+            <th>Student Name</th>
+            <th>Score</th>
+            <th>Submitted On</th>
+        </tr>
+        {% for result in top_scores %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ result.student.username }}</td>
+                <td>{{ result.score }} / {{ result.total }}</td>
+                <td>{{ result.submitted_at|date:"d M Y, h:i A" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{% url 'student_quiz_list' %}">← Back to Quizzes</a>
+{% endblock %}

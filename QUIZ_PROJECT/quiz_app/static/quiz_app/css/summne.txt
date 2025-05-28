@@ -1,0 +1,11 @@
+.container.mt-4{
+    font-weight: bold;
+    text-align: center;
+    color: #1414e1;
+    width: 500px;
+    margin: 130px auto;
+    padding: 20px;
+    background: #8eed9f;
+    box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
