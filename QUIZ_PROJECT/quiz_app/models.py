@@ -1,32 +1,38 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
-    ROLE_CHOICES = [
+class User(AbstractUser):
+    ROLE_CHOICES = (
         ('admin', 'Admin'),
-        ('student', 'Student')
-    ]
-
-    username = models.CharField(max_length=100, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+        ('student', 'Student'),
+    )
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
 
     def __str__(self):
-        return f"{self.username} ({self.role})"
+        return self.username
     
 class Quiz(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
-    duration = models.PositiveIntegerField(help_text="Duration in minutes")
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=False)
+    description = models.TextField(blank=True)
+    duration = models.IntegerField(default=10)  # in minutes
+    is_active = models.BooleanField(default=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quizzes')
+    is_published = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.title
 
+# Question model
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
-    text = models.TextField()
+    quiz = models.ForeignKey(
+        Quiz, 
+        on_delete=models.CASCADE, 
+        related_name='questions', 
+        null=True,  # temporarily allow null to fix migration issue
+        blank=True
+    )
+    text = models.CharField(max_length=500)
     option1 = models.CharField(max_length=200)
     option2 = models.CharField(max_length=200)
     option3 = models.CharField(max_length=200)

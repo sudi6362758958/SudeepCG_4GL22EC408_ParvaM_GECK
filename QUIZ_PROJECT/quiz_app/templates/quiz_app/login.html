@@ -1,19 +1,30 @@
 {% extends 'quiz_app/base.html' %}
 {% block title %}Login{% endblock %}
+{% load static %}
 
 {% block content %}
-<section class="py-5">
+<section class="py-5 bg-light">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
-                <div class="card shadow border-0 rounded-4">
-                    <div class="card-body">
-                        <h3 class="text-center mb-4">🔐 Login to Your Account</h3>
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h3 class="text-center mb-4">🔐 Login</h3>
                         <form method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <div class="mb-3">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-3 position-relative">
+                                {{ form.password.label_tag }}
+                                {{ form.password }}
+                                <span class="position-absolute top-66 end-0 translate-middle-y me-3 cursor-pointer" onclick="togglePassword()" style="user-select: none;">
+                                    👁️
+                                </span>
+                            </div>
                             <div class="d-grid gap-2 mt-3">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-primary btn-lg">Login</button>
                             </div>
                         </form>
                         <p class="text-center mt-3 mb-0">Don't have an account? 
@@ -25,4 +36,19 @@
         </div>
     </div>
 </section>
+
+<script>
+function togglePassword() {
+    const passwordField = document.querySelector('input[type="password"], input[type="text"]');
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+}
+</script>
+
+<style>
+.cursor-pointer { cursor: pointer; }
+</style>
 {% endblock %}

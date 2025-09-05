@@ -1,47 +1,34 @@
 {% extends 'quiz_app/base.html' %}
-{% load form_tags %}
-{% block title %}Create Quiz{% endblock %}
+{% block title %}Create/Edit Quiz{% endblock %}
 
 {% block content %}
-<section class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-6">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-body p-4">
-                        <h3 class="text-center mb-4">📘 Create a New Quiz</h3>
+<section class="py-5 modern-bg">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card glass-card">
+          <div class="card-body p-4">
+            <h3 class="text-center mb-4 text-gradient">
+              {% if quiz %}✏ Edit Quiz{% else %}➕ Create Quiz{% endif %}
+            </h3>
 
-                        <form method="post">
-                            {% csrf_token %}
-                            <div class="form-group mb-3">
-                                {{ form.title.label_tag }}
-                                {{ form.title|add_class:"form-control" }}
-                            </div>
-                            <div class="form-group mb-3">
-                                {{ form.description.label_tag }}
-                                {{ form.description|add_class:"form-control" }}
-                            </div>
-                            <div class="form-group mb-3">
-                                {{ form.duration.label_tag }}
-                                {{ form.duration|add_class:"form-control" }}
-                            </div>
-                            <div class="form-check mb-3">
-                                {{ form.is_active }}
-                                {{ form.is_active.label_tag }}
-                            </div>
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="d-grid mt-3">
+                <button type="submit" class="btn modern-btn">
+                  {% if quiz %}Update Quiz{% else %}Create Quiz{% endif %}
+                </button>
+              </div>
+            </form>
 
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">✅ Create Quiz</button>
-                            </div>
-                        </form>
-
-                        <div class="text-center mt-3">
-                            <a href="{% url 'dashboard' %}" class="btn btn-link">← Back to Dashboard</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center mt-3">
+              <a href="{% url 'dashboard' %}" class="btn modern-outline-btn">← Back to Dashboard</a>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 {% endblock %}

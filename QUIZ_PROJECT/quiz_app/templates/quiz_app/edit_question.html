@@ -1,11 +1,14 @@
 {% extends 'quiz_app/base.html' %}
 {% load form_tags %}
-{% block title %}Add Question{% endblock %}
+{% block title %}Edit Question{% endblock %}
 
 {% block content %}
+<h2>Edit Question for: "{{ quiz.title }}"</h2>
+<button type="submit" class="btn modern-btn">💾 Save Changes</button>
+
 <section class="py-5 modern-bg">
   <div class="container">
-    <h2 class="mb-5 text-center fw-bold text-gradient">➕ Add Questions to: <span>"{{ quiz.title }}"</span></h2>
+    <h2 class="mb-5 text-center fw-bold text-gradient" >➕ Add Questions to: <span>"{{ quiz.title }}"</span></h2>
 
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -43,7 +46,7 @@
                 {{ form.correct_answer|add_class:"form-control modern-input" }}
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn modern-btn">➕ Add Question</button>
+                <a href="{% url 'add_question' quiz.id %}" class="btn modern-btn">➕ Add Question</a>
               </div>
             </form>
           </div>

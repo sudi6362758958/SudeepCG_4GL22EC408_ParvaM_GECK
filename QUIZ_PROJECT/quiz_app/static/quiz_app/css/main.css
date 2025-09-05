@@ -1,5 +1,5 @@
 body {
-    background-color: #f5f7fa;
+    background-color: #3bcf0e;
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -8,7 +8,7 @@ h1, h2, h3 {
 }
 
 .btn-primary {
-    background-color: #3f51b5;
+    background-color: #3fb562;
     border-color: #3f51b5;
 }
 
@@ -35,7 +35,7 @@ select[name="role"]{
     width: 100%;
     padding: 8px;
     margin: 10px 0;
-    border: 1px solid blue;
+    border: 2px solid rgb(0, 255, 0);
     border-radius: 4px;
 }
 
@@ -46,8 +46,8 @@ select[name="role"]{
     width: 400px;
     margin: 130px auto;
     padding: 30px;
-    background: #c8b7b7;
-    box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
+    background: #b90303;
+    box-shadow: 0 20px 0px rgba(199, 5, 5, 0.1);
     border-radius: 8px;
 }
 
@@ -55,11 +55,11 @@ select[name="role"]{
 .container{
     font-weight: bold;
     text-align: center;
-    color: #1414e1;
+    color: #14e125;
     width: 400px;
     margin: 130px auto;
     padding: 20px;
-    background: #ec9de1;
+    background-image: linear-gradient(to right, #e20d23, #faa525)
     box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }

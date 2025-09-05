@@ -1,24 +1,38 @@
 {% extends 'quiz_app/base.html' %}
-{% block title %}View Questions{% endblock %}
+{% block title %}View Quiz{% endblock %}
 
 {% block content %}
-<h3>Questions for "{{ quiz.title }}"</h3>
+<section class="py-5 modern-bg">
+  <div class="container">
+    <div class="card glass-card">
+      <div class="card-body p-4">
+        <h3 class="fw-bold text-gradient">{{ quiz.title }}</h3>
+        <p class="text-muted">{{ quiz.description|default:"No description" }}</p>
 
-<ol>
-    {% for q in questions %}
-        <li>
-            <strong>{{ q.text }}</strong><br>
-            A. {{ q.option1 }}<br>
-            B. {{ q.option2 }}<br>
-            C. {{ q.option3 }}<br>
-            D. {{ q.option4 }}<br>
-            <b>Answer:</b> {{ q.correct_answer }}
-        </li>
-        <hr>
-    {% empty %}
-        <p>No questions added yet.</p>
-    {% endfor %}
-</ol>
+        <h5 class="mt-4">📋 Questions</h5>
+        {% if questions %}
+          <ol class="list-group list-group-numbered modern-list">
+            {% for q in questions %}
+              <li class="list-group-item modern-list-item">
+                <strong>{{ q.text }}</strong><br>
+                <span class="option">A.</span> {{ q.option1 }}<br>
+                <span class="option">B.</span> {{ q.option2 }}<br>
+                <span class="option">C.</span> {{ q.option3 }}<br>
+                <span class="option">D.</span> {{ q.option4 }}<br>
+                <span class="correct">✔ Correct Answer:</span> {{ q.correct_answer }}
+              </li>
+            {% endfor %}
+          </ol>
+        {% else %}
+          <p class="text-muted">No questions yet. <a href="{% url 'add_question' quiz.id %}">Add some!</a></p>
+        {% endif %}
 
-<a href="{% url 'dashboard' %}" class="btn btn-secondary">← Back to Dashboard</a>
+        <div class="mt-3">
+          <a href="{% url 'add_question' %}" class="btn modern-btn">➕ Add More Questions</a>
+          <a href="{% url 'dashboard' %}" class="btn modern-outline-btn">← Back to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
