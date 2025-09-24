@@ -1,48 +1,224 @@
 {% extends 'quiz_app/base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Attempt Quiz{% endblock %}
 
 {% block content %}
-    <script>
-        let timeLeft = parseInt("{{ quiz.duration|default:0 }}", 10) * 60;
+<script>
+let timeLeft = parseInt("{{ quiz.duration|default:0 }}", 10) * 60;
 
-        function startTimer() {
-            const timerDisplay = document.getElementById('timer');
-            const quizForm = document.getElementById('quiz-form');
+function startTimer() {
+    const timerDisplay = document.getElementById('timer');
+    const quizForm = document.getElementById('quiz-form');
 
-            const interval = setInterval(() => {
-                let minutes = Math.floor(timeLeft / 60);
-                let seconds = timeLeft % 60;
-                timerDisplay.innerText = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    const interval = setInterval(() => {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        timerDisplay.innerText = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    alert("Time's up! Submitting...");
-                    quizForm.submit();
-                }
-
-                timeLeft -= 1;
-            }, 1000);
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            alert("Time's up! Submitting...");
+            quizForm.submit();
         }
+        timeLeft -= 1;
+    }, 1000);
+}
+window.onload = startTimer;
 
-        window.onload = startTimer;
-    </script>
-</head>
-<body>
-    <h2>{{ quiz.title }}</h2>
-    <p><strong>Time Left:</strong> <span id="timer"></span></p>
+// Progress bar logic
+function updateProgress() {
+    const totalQuestions = {{ questions|length }};
+    const answered = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const progressPercent = Math.round((answered / totalQuestions) * 100);
+    const progressBar = document.getElementById('progress-bar-fill');
+    progressBar.style.width = progressPercent + '%';
+    progressBar.innerText = answered + " / " + totalQuestions + " answered";
+}
+
+// Highlight selected options
+document.addEventListener('change', function(e) {
+    if(e.target.type === 'checkbox') {
+        const optionCard = e.target.closest('.option-card');
+        if(e.target.checked) {
+            optionCard.classList.add('selected-option');
+        } else {
+            optionCard.classList.remove('selected-option');
+        }
+        updateProgress();
+    }
+});
+</script>
+
+<section class="py-5 quiz-bg min-vh-100">
+  <div class="container">
+    <!-- Title + Timer + Progress Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+      <h2 class="fw-bold mb-2">{{ quiz.title }}</h2>
+      <span id="timer" class="badge timer-badge fs-5 px-3 py-2 shadow">--:--</span>
+    </div>
+
+    <div class="progress mb-4" style="height: 28px; border-radius: 14px; overflow: hidden;">
+      <div id="progress-bar-fill" class="progress-bar" role="progressbar" 
+           style="width: 0%; font-weight:bold; display:flex; align-items:center; justify-content:center;">
+        0 / {{ questions|length }} answered
+      </div>
+    </div>
 
     <form method="post" id="quiz-form">
-        {% csrf_token %}
-        {% for q in questions %}
-            <div>
-                <p><strong>{{ forloop.counter }}. {{ q.text }}</strong></p>
-                <label><input type="radio" name="{{ q.id }}" value="{{ q.option1 }}"> {{ q.option1 }}</label><br>
-                <label><input type="radio" name="{{ q.id }}" value="{{ q.option2 }}"> {{ q.option2 }}</label><br>
-                <label><input type="radio" name="{{ q.id }}" value="{{ q.option3 }}"> {{ q.option3 }}</label><br>
-                <label><input type="radio" name="{{ q.id }}" value="{{ q.option4 }}"> {{ q.option4 }}</label><br>
+      {% csrf_token %}
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          {% for q in questions %}
+          <!-- Question Card -->
+          <div class="quiz-card mb-4">
+            <div class="card-body">
+              <p class="quiz-question mb-3">{{ forloop.counter }}. {{ q.text }}</p>
+
+              <div class="row g-3">
+                <!-- Options as small cards -->
+                <div class="col-md-6">
+                  <label class="option-card">
+                    <input type="checkbox" name="{{ q.id }}" value="option1">
+                    <span class="option-text">{{ q.option1 }}</span>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="option-card">
+                    <input type="checkbox" name="{{ q.id }}" value="option2">
+                    <span class="option-text">{{ q.option2 }}</span>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="option-card">
+                    <input type="checkbox" name="{{ q.id }}" value="option3">
+                    <span class="option-text">{{ q.option3 }}</span>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="option-card">
+                    <input type="checkbox" name="{{ q.id }}" value="option4">
+                    <span class="option-text">{{ q.option4 }}</span>
+                  </label>
+                </div>
+              </div>
             </div>
-            <hr>
-        {% endfor %}
-        <button type="submit">Submit Quiz</button>
+          </div>
+          {% empty %}
+          <div class="alert alert-warning shadow-sm">⚠️ No questions found for this quiz.</div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-gradient px-5 py-2 shadow">
+          🚀 Submit Quiz
+        </button>
+      </div>
     </form>
+  </div>
+</section>
+
+<style>
+/* Background */
+.quiz-bg {
+    background: #f5f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* Timer */
+.timer-badge {
+    background: #ffeb3b;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Question card */
+.quiz-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quiz-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* Question text */
+.quiz-question {
+    font-weight: bold;
+    color: #000;
+    font-size: 1.05rem;
+}
+
+/* Option cards */
+.option-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;    
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    border: 1px solid transparent;
+    font-weight: bold;
+    color: #000;
+}
+.option-card input {
+    margin-right: 10px;
+    width: 1.3em;   /* medium size checkbox */
+    height: 1.3em;
+    cursor: pointer;
+}
+.option-card:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+    border-color: #ccc;
+}
+
+/* Highlight selected option with smooth animation */
+.selected-option {
+    background: #0ada3b !important;
+    border-color: #28a745 !important;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Submit button */
+.btn-gradient {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    border: none;
+    color: #fff;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(45deg, #20c997, #28a745);
+    transform: translateY(-2px);
+}
+
+/* Progress bar */
+.progress-bar {
+    background: linear-gradient(90deg, #28a745, #20c997);
+    color: #000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .option-card {
+        padding: 10px 12px;
+    }
+    .option-card input {
+        width: 1.2em;
+        height: 1.2em;
+    }
+}
+</style>
 {% endblock %}

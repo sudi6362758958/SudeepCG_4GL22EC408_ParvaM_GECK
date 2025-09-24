@@ -4,26 +4,62 @@
 <head>
     <title>Quiz Result</title>
     <link rel="stylesheet" href="{% static 'quiz_app/css/main.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #2a5298;
+        }
+        .result-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .correct { color: green; font-weight: bold; }
+        .incorrect { color: red; font-weight: bold; }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2a5298;
+        }
+    </style>
 </head>
 <body>
     <h2>{{ quiz.title }} - Your Score: {{ score }} / {{ total }}</h2>
 
-    <ul>
-        {% for r in results %}
-            <li>
-                <strong>{{ r.question }}</strong><br>
-                Your Answer: {{ r.selected }} <br>
-                Correct Answer: {{ r.correct }} <br>
-                {% if r.is_correct %}
-                    ✅ Correct
-                {% else %}
-                    ❌ Incorrect
-                {% endif %}
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
+    {% for r in results %}
+        <div class="result-card">
+            <p><strong>{{ forloop.counter }}. {{ r.question }}</strong></p>
 
-    <a href="{% url 'student_quiz_list' %}">← Back to Quizzes</a>
+            <p>
+                <strong>Your Answer:</strong>
+                {% if r.selected_texts %}
+                    {{ r.selected_texts|join:", " }}
+                {% else %}
+                    <em>No Answer</em>
+                {% endif %}
+            </p>
+
+            <p><strong>Correct Answer:</strong> {{ r.correct_texts|join:", " }}</p>
+
+            {% if r.is_correct %}
+                <p class="correct">✅ Correct</p>
+            {% else %}
+                <p class="incorrect">❌ Incorrect</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'student_quiz_list' %}" class="back-link">← Back to Quizzes</a>
 </body>
 </html>

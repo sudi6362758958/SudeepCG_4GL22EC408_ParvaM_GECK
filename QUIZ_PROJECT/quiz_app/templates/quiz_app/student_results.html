@@ -1,22 +1,195 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Quiz Results</title>
-    <link rel="stylesheet" href="{% static 'quiz_app/css/main.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Quiz Results</title>
+<link rel="stylesheet" href="{% static 'quiz_app/css/main.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 15px;
+        margin: 0;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: #333;
+    }
+    .results-list {
+        max-width: 700px;
+        width: 95%;
+        margin: 0 auto 30px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .results-list li {
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+    .quiz-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        font-size: 1rem;
+        color: #000;
+    }
+    .quiz-date {
+        font-size: 0.85rem;
+        color: #555;
+        margin-bottom: 8px;
+    }
+    .progress-wrapper {
+        background: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 18px;
+    }
+    .progress-bar {
+        height: 100%;
+        text-align: right;
+        padding-right: 5px;
+        color: #fff;
+        font-size: 12px;
+        line-height: 18px;
+        transition: width 0.5s ease;
+    }
+    a.back-link {
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        padding: 10px 15px;
+        border-radius: 30px;
+        font-weight: bold;
+        width: fit-content;
+    }
+    .chart-container {
+        max-width: 700px;
+        width: 95%;
+        margin: 0 auto 30px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        height: 500px; /* increased height */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .quiz-title { font-size: 0.95rem; }
+        .quiz-date { font-size: 0.8rem; }
+        .progress-wrapper { height: 16px; }
+        .chart-container { height: 400px; }
+    }
+    @media (max-width: 480px) {
+        h2 { font-size: 1.5rem; }
+        .results-list, .chart-container { padding: 15px; }
+        .progress-wrapper { height: 14px; }
+        .progress-bar { font-size: 10px; }
+        a.back-link { padding: 8px 12px; font-size: 0.9rem; }
+        .chart-container { height: 300px; }
+    }
+</style>
 </head>
 <body>
-    <h2>Your Past Results</h2>
-    <ul>
-        {% for result in results %}
-            <li>
-                <strong>{{ result.quiz.title }}</strong> – Score: {{ result.score }}/{{ result.total }}<br>
-                Taken on: {{ result.submitted_at|date:"d M Y, h:i A" }}
-            </li>
-        {% empty %}
-            <li>No results found.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'student_quiz_list' %}">← Back to Quiz List</a>
+<h2>Your Quiz Performance</h2>
+
+<!-- List of Results -->
+<ul class="results-list">
+    {% for result in results %}
+    <li>
+        <div class="quiz-title">
+            <span>{{ result.quiz.title }}</span>
+            <span>{{ result.score }}/{{ result.total }}</span>
+        </div>
+        <div class="quiz-date">
+            Taken on: {{ result.submitted_at|date:"d M Y, h:i A" }}
+        </div>
+        <div class="progress-wrapper">
+            <div class="progress-bar"
+                 style="width: {{ result.percentage }}%; background-color: {{ result.color }};">
+                {{ result.percentage }}%
+            </div>
+        </div>
+    </li>
+    {% empty %}
+        <li>No results found.</li>
+    {% endfor %}
+</ul>
+
+<!-- Chart Section -->
+{% if results %}
+<div class="chart-container">
+    <canvas id="stackedBarChart"></canvas>
+</div>
+{% endif %}
+
+<a href="{% url 'student_quiz_list' %}" class="back-link">← Back to Quiz List</a>
+
+{% if results %}
+<script>
+const ctx = document.getElementById('stackedBarChart').getContext('2d');
+
+const labels = [
+    {% for result in results %} "{{ result.quiz.title }}"{% if not forloop.last %},{% endif %}{% endfor %}
+];
+const correctAnswers = [
+    {% for result in results %} {{ result.score }}{% if not forloop.last %},{% endif %}{% endfor %}
+];
+const wrongAnswers = [
+    {% for result in results %} {{ result.wrong_answers }}{% if not forloop.last %},{% endif %}{% endfor %}
+];
+const correctColors = [
+    {% for result in results %} '{{ result.color }}'{% if not forloop.last %},{% endif %}{% endfor %}
+];
+const wrongColors = [
+    {% for result in results %} '#e74a3b'{% if not forloop.last %},{% endif %}{% endfor %}
+];
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [
+            { label: 'Correct Answers', data: correctAnswers, backgroundColor: correctColors },
+            { label: 'Wrong Answers', data: wrongAnswers, backgroundColor: wrongColors }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: { display: true, text: 'Quiz Performance (Stacked Bar)' },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ' + context.parsed.y;
+                    }
+                }
+            },
+            legend: { position: 'top' }
+        },
+        scales: {
+            x: { stacked: true, 
+                 barPercentage: 0.5,    // narrower bars
+                 categoryPercentage: 0.5 
+            },
+            y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Number of Questions' } }
+        }
+    }
+});
+</script>
+{% endif %}
 </body>
 </html>

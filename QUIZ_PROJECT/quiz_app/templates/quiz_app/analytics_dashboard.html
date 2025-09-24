@@ -2,25 +2,277 @@
 {% block title %}Analytics Dashboard{% endblock %}
 
 {% block content %}
-    <h2>📊 Analytics Dashboard</h2>
+<section class="py-5 modern-bg min-vh-100">
+  <div class="container">
+    <h2 class="text-center mb-5 fw-bold text-gradient">📊 Analytics Dashboard</h2>
 
-    <ul>
-        <li><strong>Total Quizzes:</strong> {{ total_quizzes }}</li>
-        <li><strong>Total Students:</strong> {{ total_students }}</li>
-        <li><strong>Total Quiz Attempts:</strong> {{ total_attempts }}</li>
-        <li><strong>Average Score:</strong> {{ average_score|floatformat:2 }}</li>
-        <li><strong>Highest Score:</strong> {{ top_score }}</li>
-        <li><strong>Lowest Score:</strong> {{ low_score }}</li>
+    <!-- Cards Section -->
+    <div class="row g-4">
+      <!-- Total Quizzes -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">📝</div>
+          <h5>Total Quizzes</h5>
+          <p class="fs-4 fw-bold">{{ total_quizzes }}</p>
+        </div>
+      </div>
 
-        {% if most_attempted_quiz %}
-            <li>
-                <strong>Most Attempted Quiz:</strong>
-                {{ most_attempted_quiz.quiz__title }} ({{ most_attempted_quiz.count }} attempts)
-            </li>
-        {% else %}
-            <li><strong>Most Attempted Quiz:</strong> N/A</li>
-        {% endif %}
-    </ul>
+      <!-- Total Students -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">👨‍🎓</div>
+          <h5>Total Students</h5>
+          <p class="fs-4 fw-bold">{{ total_students }}</p>
+        </div>
+      </div>
 
-    <a href="{% url 'dashboard' %}">← Back to Admin Dashboard</a>
+      <!-- Total Quiz Attempts -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">✅</div>
+          <h5>Total Quiz Attempts</h5>
+          <p class="fs-4 fw-bold">{{ total_attempts }}</p>
+        </div>
+      </div>
+
+      <!-- Average Score -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">📈</div>
+          <h5>Average Score</h5>
+          <p class="fs-4 fw-bold">{{ average_score|floatformat:2 }}</p>
+        </div>
+      </div>
+
+      <!-- Highest Score -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">🏆</div>
+          <h5>Highest Score</h5>
+          <p class="fs-4 fw-bold">{{ top_score }}</p>
+        </div>
+      </div>
+
+      <!-- Lowest Score -->
+      <div class="col-md-4">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">📉</div>
+          <h5>Lowest Score</h5>
+          <p class="fs-4 fw-bold">{{ low_score }}</p>
+        </div>
+      </div>
+
+      <!-- Most Attempted Quiz -->
+      <div class="col-md-12">
+        <div class="card glass shadow-sm text-center p-4 card-hover">
+          <div class="fs-2 mb-2">🔥</div>
+          <h5>Most Attempted Quiz</h5>
+          <p class="fs-5 fw-bold">
+            {% if most_attempted_quiz %}
+            {{ most_attempted_quiz.quiz__title }} ({{ most_attempted_quiz.count }} attempts)
+            {% else %}
+            N/A
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row mt-5 g-4">
+      <!-- Bar Chart: Attempts per Quiz -->
+      <div class="col-md-6">
+        <div class="card glass shadow-sm p-4 chart-card">
+          <h5 class="text-center text-dark mb-3">Attempts per Quiz</h5>
+          <canvas id="attemptsChart" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- Line Chart: Scores Distribution -->
+      <div class="col-md-6">
+        <div class="card glass shadow-sm p-4 chart-card">
+          <h5 class="text-center text-dark mb-3">Scores Distribution</h5>
+          <canvas id="scoresChart" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- Pie Chart: Summary -->
+      <div class="col-md-4 offset-md-4">
+        <div class="card glass shadow-sm p-4 chart-card">
+          <h5 class="text-center text-dark mb-3">Quiz Summary</h5>
+          <canvas id="summaryChart" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-5 mt-4">
+      <a href="{% url 'dashboard' %}" class="btn btn-danger px-5 shadow-sm">← Back to Admin Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const chartLabels = {{ chart_labels| safe }};
+  const chartData = {{ chart_data| safe }};
+  const scores = {{ scores| safe }};
+  const studentNames = {{ student_names| safe }};
+
+  // Bar Chart: Attempts per Quiz
+  new Chart(document.getElementById('attemptsChart'), {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'Attempts',
+        data: chartData,
+        backgroundColor: chartData.map(() => 'rgba(255, 197, 24, 0.8)'),
+        borderColor: chartData.map(() => 'rgba(280, 102, 204, 1)'),
+        borderWidth: 2,
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          backgroundColor: '#000',
+          titleColor: '#fffd',
+          bodyColor: '#ffff',
+          callbacks: {
+            label: function (context) {
+              return `${context.label}: ${context.parsed.y} attempts`;
+            }
+          }
+        }
+      },
+      interaction: { mode: 'index', intersect: false },
+      scales: { y: { beginAtZero: true } },
+      animation: { duration: 1200, easing: 'easeOutQuart' }
+    }
+  });
+
+  // Line Chart: Scores Distribution
+  const ctxLine = document.getElementById('scoresChart').getContext('2d');
+  const gradientLine = ctxLine.createLinearGradient(0, 0, 0, 200);
+  gradientLine.addColorStop(0, 'rgba(255, 153, 102, 0.6)');
+  gradientLine.addColorStop(1, 'rgba(255, 153, 102, 0.1)');
+
+  new Chart(ctxLine, {
+    type: 'line',
+    data: {
+      labels: studentNames,  // ✅ student names instead of "Attempt 1, Attempt 2"
+      datasets: [{
+        label: 'Score',
+        data: scores,
+        borderColor: 'rgba(255, 102, 51, 1)',
+        backgroundColor: gradientLine,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: 'rgba(255, 102, 51, 1)',
+        pointBorderColor: '#fff',
+        pointRadius: 6,
+        pointHoverRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          enabled: true,
+          backgroundColor: '#333',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          callbacks: {
+            label: function (context) { return `${context.label}: ${context.parsed.y}`; }
+          }
+        }
+      },
+      interaction: { mode: 'nearest', intersect: true },
+      scales: { y: { beginAtZero: true } },
+      animation: { duration: 1500, easing: 'easeOutQuart' }
+    }
+  });
+
+  // Pie Chart: Summary
+  new Chart(document.getElementById('summaryChart'), {
+    type: 'pie',
+    data: {
+      labels: ['Total Quizzes', 'Total Students', 'Total Attempts'],
+      datasets: [{
+        data: [{{ total_quizzes }}, {{ total_students }}, {{ total_attempts }}],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(54, 162, 235, 0.7)',
+          'rgba(102, 255, 178, 0.7)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(0, 153, 102, 1)'
+        ],
+        borderWidth: 2,
+        hoverOffset: 20
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#000', padding: 15 } },
+        tooltip: {
+          enabled: true,
+          backgroundColor: '#333',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          callbacks: {
+            label: function (context) { return `${context.label}: ${context.parsed}`; }
+          }
+        }
+      },
+      animation: { animateRotate: true, duration: 1200, easing: 'easeOutQuart' }
+    }
+  });
+</script>
+
+<style>
+  .modern-bg {
+    background: linear-gradient(135deg, #f0f0f0, #eceaf5);
+  }
+
+  .glass {
+    background: linear-gradient(40deg, #d83772, #a899c5);
+    backdrop-filter: blur(100px);
+    border: 1px solid rgba(138, 125, 211, 0.966);
+    border-radius: 10px;
+    transition: transform 0.6s, box-shadow 0.6s;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(236, 7, 7, 0.856);
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .card h5,
+  .card p {
+    color: #1a1919ea;
+  }
+
+  .chart-card {
+    background: linear-gradient(135deg, rgba(163, 77, 77, 0.05), rgba(255, 255, 255, 0.1));
+  }
+
+  .col-md-4.offset-md-4 {
+    max-width: 47.33%;
+  }
+</style>
 {% endblock %}

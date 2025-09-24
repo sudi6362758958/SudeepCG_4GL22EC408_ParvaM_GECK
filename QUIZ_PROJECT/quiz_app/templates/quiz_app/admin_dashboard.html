@@ -2,60 +2,125 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-<section class="py-4">
+<section class="py-5 bg-light min-vh-100">
     <div class="container">
-        <h2 class="mb-4 text-center fw-bold">👨‍🏫 Admin Dashboard</h2>
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="text-secondary">Your Quizzes</h5>
-            <a href="{% url 'create_quiz' %}" class="btn btn-success">
-                + Create New Quiz
-            </a>
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-primary">👨‍🏫 Admin Dashboard</h2>
+            <p class="text-muted">Manage your quizzes, track results & view analytics</p>
         </div>
 
-        {% if quizzes %}
-            <div class="table-responsive">
-                <table class="table table-hover align-middle shadow-sm rounded">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Title</th>
-                            <th>Duration</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for quiz in quizzes %}
-                        <tr>
-                            <td><strong>{{ quiz.title }}</strong></td>
-                            <td>{{ quiz.duration }} min</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a href="{% url 'add_question' quiz.id %}" class="btn btn-sm btn-outline-primary">Add</a>
-                                    <a href="{% url 'view_questions' quiz.id %}" class="btn btn-sm btn-outline-info">View </a>
-                                    <a href="{% url 'delete_quiz' quiz.id %}" class="btn btn-sm btn-outline-danger"
-                                       onclick="return confirm('Are you sure you want to delete this quiz?');">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <div class="alert alert-info text-center">You haven’t created any quizzes yet.</div>
-        {% endif %}
+        <!-- Quizzes Section -->
+        <div class="card shadow-sm border-0 rounded-4 mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-semibold text-dark">📚 Your Quizzes</h5>
+                    <a href="{% url 'create_quiz' %}" class="btn btn-success rounded-pill px-4">
+                        + Create Quiz
+                    </a>
+                </div>
 
-        <div class="mt-4">
-            <h5 class="text-secondary">Quick Tools</h5>
-            <div class="d-flex flex-column gap-2">
-                <a href="{% url 'view_all_results' %}" class="btn btn-outline-dark">
-                    📋 View All Student Results
+                {% if quizzes %}
+                <div class="table-responsive">
+                    <table class="table align-middle table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th class="fw-semibold">Title</th>
+                                <th class="fw-semibold">Duration</th>
+                                <th class="fw-semibold">Status</th>
+                                <th class="fw-semibold text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quiz in quizzes %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'edit_quiz' quiz.id %}"
+                                        class="fw-bold text-decoration-none text-primary">
+                                        ✏️ {{ quiz.title }}
+                                    </a>
+                                </td>
+                                
+                                <td>
+                                    <a href="{% url 'edit_quiz_time' quiz.id %}"
+                                        class="badge bg-info px-3 py-2 text-dark">
+                                        ⏱ {{ quiz.duration }} min
+                                    </a>
+                                </td>
+
+                                <!-- Status Column -->
+                                <td>
+                                    {% if quiz.is_active %}
+                                        <span class="badge bg-success">✅ Active</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">⏳ Draft</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Actions Column -->
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="{% url 'add_question' quiz.id %}"
+                                            class="btn btn-sm btn-outline-primary rounded-pill">➕ Add</a>
+                                        <a href="{% url 'view_questions' quiz.id %}"
+                                            class="btn btn-sm btn-outline-info rounded-pill">👁 View</a>
+                                        <a href="{% url 'delete_quiz' quiz.id %}"
+                                            class="btn btn-sm btn-outline-danger rounded-pill"
+                                            onclick="return confirm('Are you sure you want to delete this quiz?');">
+                                            🗑 Delete
+                                        </a>
+                                        <!-- Publish/Unpublish -->
+                                        <form method="post" action="{% url 'toggle_quiz' quiz.id %}" class="d-inline">
+                                            {% csrf_token %}
+                                            {% if quiz.is_active %}
+                                                <button type="submit" class="btn btn-sm btn-danger rounded-pill">Unpublish</button>
+                                            {% else %}
+                                                <button type="submit" class="btn btn-sm btn-success rounded-pill">Publish</button>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info text-center rounded-3 shadow-sm">
+                    🚀 You haven’t created any quizzes yet.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Quick Tools -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <a href="{% url 'view_all_results' %}"
+                    class="card shadow-sm border-0 rounded-4 h-100 text-decoration-none text-dark">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="fs-3">📋</span>
+                        <div>
+                            <h6 class="fw-bold mb-0">View All Results</h6>
+                            <small class="text-muted">Check student performance and scores</small>
+                        </div>
+                    </div>
                 </a>
-                <a href="{% url 'analytics_dashboard' %}" class="btn btn-outline-dark">
-                    📊 Analytics Dashboard
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'analytics_dashboard' %}"
+                    class="card shadow-sm border-0 rounded-4 h-100 text-decoration-none text-dark">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="fs-3">📊</span>
+                        <div>
+                            <h6 class="fw-bold mb-0">Analytics Dashboard</h6>
+                            <small class="text-muted">View insights and quiz trends</small>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
+
     </div>
 </section>
 {% endblock %}

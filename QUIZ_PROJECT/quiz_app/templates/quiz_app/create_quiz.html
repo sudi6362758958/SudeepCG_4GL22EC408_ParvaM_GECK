@@ -2,33 +2,119 @@
 {% block title %}Create/Edit Quiz{% endblock %}
 
 {% block content %}
-<section class="py-5 modern-bg">
+<section class="py-5 modern-bg min-vh-100 d-flex align-items-center">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card glass-card">
-          <div class="card-body p-4">
-            <h3 class="text-center mb-4 text-gradient">
-              {% if quiz %}✏ Edit Quiz{% else %}➕ Create Quiz{% endif %}
-            </h3>
+      <div class="col-md-7 col-lg-6">
 
-            <form method="post">
+        <!-- Glassmorphic Card -->
+        <div class="card glass-card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            
+            <!-- Header -->
+            <div class="text-center mb-4">
+              <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center"
+                   style="width:70px; height:70px;">
+                <span class="fs-2 text-primary">
+                  {% if quiz %}✏️{% else %}➕{% endif %}
+                </span>
+              </div>
+              <h3 class="fw-bold text-gradient mt-3">
+                {% if quiz %}Edit Quiz{% else %}Create New Quiz{% endif %}
+              </h3>
+              <p class="text-muted small">
+                {% if quiz %}Update your quiz details below{% else %}Fill the form to create a quiz{% endif %}
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form method="post" class="needs-validation" novalidate>
               {% csrf_token %}
-              {{ form.as_p }}
-              <div class="d-grid mt-3">
-                <button type="submit" class="btn modern-btn">
-                  {% if quiz %}Update Quiz{% else %}Create Quiz{% endif %}
+
+              <div class="form-floating mb-3">
+                {{ form.title }}
+                <label for="id_title">Quiz Title</label>
+                {% if form.title.errors %}
+                  <div class="text-danger small mt-1">{{ form.title.errors|striptags }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-floating mb-3">
+                {{ form.description }}
+                <label for="id_description">Description</label>
+                {% if form.description.errors %}
+                  <div class="text-danger small mt-1">{{ form.description.errors|striptags }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn modern-btn py-2 fs-5">
+                  {% if quiz %}💾 Update Quiz{% else %}🚀 Create Quiz{% endif %}
                 </button>
               </div>
             </form>
 
-            <div class="text-center mt-3">
-              <a href="{% url 'dashboard' %}" class="btn modern-outline-btn">← Back to Dashboard</a>
+            <!-- Back Link -->
+            <div class="text-center mt-4">
+              <a href="{% url 'dashboard' %}" class="btn modern-outline-btn px-4">
+                ← Back to Dashboard
+              </a>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #0d6efd, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .modern-btn {
+    background: linear-gradient(45deg, #0d6efd, #6610f2);
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  .modern-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.35);
+  }
+
+  .modern-outline-btn {
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  .modern-outline-btn:hover {
+    background: #0d6efd;
+    color: #fff;
+  }
+
+  .form-floating>.form-control,
+  .form-floating>.form-select {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  .form-floating>label {
+    color: #6c757d;
+  }
+</style>
 {% endblock %}

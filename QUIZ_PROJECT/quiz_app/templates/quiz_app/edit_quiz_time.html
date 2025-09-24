@@ -1,0 +1,19 @@
+{% extends 'quiz_app/base.html' %}
+{% block title %}Edit Quiz Time{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">⏳ Edit Quiz Duration</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (in minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" 
+                   value="{{ quiz.duration }}" min="1" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Save Changes</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

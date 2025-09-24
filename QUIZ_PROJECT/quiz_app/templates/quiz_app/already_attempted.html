@@ -2,7 +2,71 @@
 {% block title %}Already Attempted{% endblock %}
 
 {% block content %}
-    <h2>You have already submitted the quiz: {{ quiz.title }}</h2>
-    <p>You cannot re-attempt this quiz.</p>
-    <a href="{% url 'student_quiz_list' %}">← Back to Quiz List</a>
+<section class="attempted-section d-flex align-items-center justify-content-center min-vh-100">
+    <div class="attempted-card text-center p-5">
+        <div class="icon">&#128274;</div> <!-- Lock emoji -->
+        <h2 class="fw-bold mb-3">Quiz Already Submitted</h2>
+        <p class="mb-4">You have already submitted the quiz: <strong>{{ quiz.title }}</strong>. You cannot re-attempt this quiz.</p>
+        <a href="{% url 'student_quiz_list' %}" class="btn btn-danger">← Back to Quiz List</a>
+    </div>
+</section>
+
+<style>
+/* Section & Background */
+.attempted-section {
+    background: #f7f7f7;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* Card */
+.attempted-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 90%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attempted-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Icon */
+.attempted-card .icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: #ff6b6b; /* subtle red to indicate warning */
+}
+
+/* Back Button */
+.btn-back {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-back:hover {
+    background: #d5d5d5;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .attempted-card {
+        padding: 30px 20px;
+    }
+
+    .attempted-card .icon {
+        font-size: 40px;
+    }
+}
+</style>
 {% endblock %}

@@ -1,22 +1,38 @@
-{% extends 'quiz_app/base.html' %}
-{% block title %}Welcome{% endblock %}
+{% extends "quiz_app/base.html" %}
+{% block title %}Quiz Time{% endblock %}
 
 {% block content %}
-<section class="py-5 text-center text-md-start">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <h1 class="display-4 fw-bold text-dark">
-                    Welcome to <span class="text-primary">QuizMaster</span>
-                </h1>
-                <p class="lead text-muted mt-3 mb-4">
-                    The ultimate platform for creating, taking, and evaluating quizzes — with instant results and beautiful analytics.
-                </p>
-                <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-4">Get Started</a>
-                <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg px-4 ms-2">Login</a>
+<section class="hero-section text-center text-white d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4 fw-bold mb-6 colorful-heading">QUIZ TIME</h1>
+    <p class="lead mb-4">Get Ready for an Exciting Quiz Adventure!<br>
+        Test your knowledge across multiple categories & challenge yourself.</p>
+    <a href="{% url 'register' %}" class="btn btn-warning btn-lg fw-bold px-4 py-2">Start Now</a><hr>
+    <a href="{% url 'login' %}" class="btn btn-warning btn-lg fw-bold px-4 py-2">Login</a>
+</section>
+
+<section class="category-section py-5">
+    <div class="home text-center">
+        <h2 class="fw-bold mb-4">Select a Category</h2>
+        <div class="row g-4">
+           <div class="col-md-3 col-6">
+                <div class="card category-card shadow-sm">
+                    <div class="card-body">🎓 GK</div>
+                </div>
             </div>
-            <div class="col-md-6 text-center">
-                <img src="https://cdn-icons-png.flaticon.com/512/906/906175.png" class="img-fluid" style="max-height: 320px;" alt="Quiz Image">
+            <div class="col-md-3 col-6">
+                <div class="card category-card shadow-sm">
+                    <div class="card-body">💻 Technology</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card category-card shadow-sm">
+                    <div class="card-body">⚽ Sports</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card category-card shadow-sm">
+                    <div class="card-body">📖 Subjects</div>
+                </div>
             </div>
         </div>
     </div>

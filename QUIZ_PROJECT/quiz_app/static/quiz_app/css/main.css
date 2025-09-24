@@ -3,7 +3,12 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-h1, h2, h3 {
+
+
+
+h1,
+h2,
+h3 {
     font-weight: 700;
 }
 
@@ -31,48 +36,94 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
-select[name="role"]{
+select[name="role"],
+textarea[name="description"] {
     width: 100%;
     padding: 8px;
     margin: 10px 0;
-    border: 2px solid rgb(0, 255, 0);
+    border: 2px solid rgb(99, 235, 99);
     border-radius: 4px;
 }
 
-.card-body{
+/* -------------------------------------------------------------------------------- */
+
+/* view all students result */
+.custum-card-body {
     font-weight: bold;
     text-align: center;
-    color: #1414e1;
-    width: 400px;
-    margin: 130px auto;
-    padding: 30px;
-    background: #b90303;
-    box-shadow: 0 20px 0px rgba(199, 5, 5, 0.1);
-    border-radius: 8px;
+    color: hsl(0, 100%, 48%);
+    width: 900px;
+    margin: 60px auto;
+    padding: 10px;
+    box-shadow: 0 20px 0px rgba(168, 42, 42, 0.1);
+    border-radius: 6px;
 }
 
 /* student result leaderboard */
-.container{
+.container {
     font-weight: bold;
     text-align: center;
     color: #14e125;
     width: 400px;
     margin: 130px auto;
     padding: 20px;
-    background-image: linear-gradient(to right, #e20d23, #faa525)
-    box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(to right, #e20d23, #faa525) box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
-/* 
-.container < mt-4{
-    font-weight: bold;
-    text-align: center;
-    color: #1414e1;
-    width: 400px;
-    margin: 130px auto;
-    padding: 20px;
-    background: ;
-    box-shadow: 0 20px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 
-} */
+/* Hero Section */
+.hero-section {
+    min-height: 70vh;
+    background: linear-gradient(135deg, #ad84da 0%, #363941 100%);
+    /* purple background */
+    padding: 50px 20px;
+    margin-top: 20px;
+}
+
+/* Colorful "QUIZ TIME" heading */
+.colorful-heading {
+    letter-spacing: 5px;
+    display: inline-block;
+    background: linear-gradient(90deg, #ff4b5c, #ffcc29, #6bcbee, #52de97);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Category Section */
+.category-card {
+    border-radius: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.category-card .card-body {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* footer */
+footer {
+    color: white;
+    background-image: linear-gradient(rgb(50, 9, 236), rgb(21, 93, 247));
+    text-align: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.home{
+   
+    width: 900px;
+    margin: 10px auto;
+    padding: 20px;
+    background-image: linear-gradient(to right, #bc4e9c, #f80759);
+    box-shadow: 0 20px 0px rgba(201, 3, 3, 0.1);
+    border-radius: 8px;
+}
+
+/* Target your custom nav container */

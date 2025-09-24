@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'QUIZ_PROJECT.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quiz_db',
+        'NAME': 'quiz_app',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

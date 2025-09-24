@@ -1,15 +1,56 @@
 {% extends 'quiz_app/base.html' %}
-{% block title %}Confirm Delete{% endblock %}
+{% block title %}Edit Quiz Title{% endblock %}
 
 {% block content %}
-<div class="container py-4 text-center">
-    <h3>⚠️ Are you sure you want to delete this quiz?</h3>
-    <p><strong>{{ quiz.title }}</strong> (Duration: {{ quiz.duration }} min)</p>
+<section class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 520px; width: 100%;">
+        <div class="card-body">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width:60px; height:60px;">
+                    <span class="fs-3 text-primary">✏️</span>
+                </div>
+                <h3 class="fw-bold text-primary mt-3">Edit Quiz Title</h3>
+                <p class="text-muted small">Update your quiz title and save changes instantly</p>
+            </div>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+            <!-- messages (errors / success) -->
+            {% if messages %}
+                <div class="mb-3">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} py-2 small mb-2">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Form -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Quiz Title</label>
+                    <input type="text" 
+                           id="title" 
+                           name="title" 
+                           class="form-control rounded-3 shadow-sm" 
+                           value="{{ attempted_title|default:quiz.title }}" 
+                           required>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'admin_dashboard' %}" 
+                       class="btn btn-light border rounded-3 px-4 shadow-sm">
+                        ⬅ Cancel
+                    </a>
+                    <button type="submit" 
+                            class="btn btn-primary rounded-3 px-4 shadow-sm">
+                        💾 Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock %}

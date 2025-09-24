@@ -5,14 +5,15 @@
 {% block content %}
 <div class="container py-5">
 
-    <!-- Welcome -->
+    <!-- Welcome Section -->
     <div class="text-center mb-5">
         <h2 class="fw-bold text-primary">👋 Welcome, {{ user.username }}</h2>
         <p class="text-muted">Your learning progress and quizzes at a glance</p>
     </div>
 
-    <!-- Cards -->
+    <!-- Cards Section -->
     <div class="row g-4 justify-content-center">
+        <!-- Take Quiz Card -->
         <div class="col-md-4">
             <div class="card shadow-lg border-0 rounded-4 h-100 bg-gradient bg-light">
                 <div class="card-body text-center">
@@ -24,6 +25,7 @@
             </div>
         </div>
 
+        <!-- View Results Card -->
         <div class="col-md-4">
             <div class="card shadow-lg border-0 rounded-4 h-100 bg-gradient bg-light">
                 <div class="card-body text-center">
@@ -36,8 +38,7 @@
         </div>
     </div>
 
-    <!-- Results Graph -->
-    {% if quiz_labels %}
+    <!-- Results Graph Section -->
     <div class="mt-5">
         <h4 class="fw-bold text-center mb-4">📈 Your Quiz Performance</h4>
         <div class="card shadow-lg border-0 rounded-4">
@@ -46,9 +47,8 @@
             </div>
         </div>
     </div>
-    {% endif %}
 
-    <!-- Past Results Table -->
+    <!-- Optional: Table of past results -->
     {% if results %}
     <div class="mt-5">
         <h4 class="fw-bold text-center mb-4">📝 Past Results</h4>
@@ -83,30 +83,41 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const labels = {{ quiz_labels|safe }};
-    const scores = {{ quiz_scores|safe }};
+    const ctx = document.getElementById("resultsChart").getContext("2d");
 
-    if (labels.length > 0) {
-        const ctx = document.getElementById("resultsChart").getContext("2d");
-        new Chart(ctx, {
-            type: "bar",   // You can change to "line"
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Scores",
-                    data: scores,
-                    borderColor: "#0d6efd",
-                    backgroundColor: "rgba(13, 110, 253, 0.5)",
-                    borderWidth: 2
-                }]
+    new Chart(ctx, {
+        type: "line", // Change to 'bar' or 'doughnut' if desired
+        data: {
+            labels: {{ quiz_labels|safe }},   // ["Math", "Science", "GK"]
+            datasets: [{
+                label: "Scores",
+                data: {{ quiz_scores|safe }},  // [80, 70, 90]
+                borderColor: "#0d6efd",
+                backgroundColor: "rgba(13, 110, 253, 0.3)",
+                tension: 0.3,
+                fill: true,
+                borderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { color: "#333" }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 100 } }
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { stepSize: 20 }
+                }
             }
-        });
-    }
+        }
+    });
 });
 </script>
 {% endblock %}
